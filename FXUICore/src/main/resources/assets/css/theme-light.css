@@ -1,0 +1,15 @@
+.ui-button {
+    -fx-text-fill: white;
+    -fx-body-color: black;
+
+    -fx-shadow-highlight-color: transparent;
+    -fx-outer-border: transparent;
+    -fx-inner-border: transparent;
+    -fx-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.ui-button:pressed {
+    -fx-text-fill: black;
+    -fx-body-color: white;
+}

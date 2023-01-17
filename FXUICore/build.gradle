@@ -21,6 +21,7 @@ dependencies {
     if (JavaVersion.current() >= JavaVersion.VERSION_11) {
         implementation files(new File(this.getRootDir().getAbsolutePath(), "jfxrt.jar").getAbsolutePath());
     }
+    implementation("com.jfoenix:jfoenix:8.0.9")
 }
 
 test {
