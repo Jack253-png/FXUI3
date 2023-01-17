@@ -11,6 +11,7 @@
         </element>
       </element>
       <element id="module-output" name="fxui3.FXUICore.main" />
+      <element id="dir-copy" path="$PROJECT_DIR$/FXUICore/src/main/resources" />
     </root>
   </artifact>
 </component>
