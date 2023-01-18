@@ -1,15 +1,47 @@
 .ui-button {
-    -fx-text-fill: white;
-    -fx-body-color: black;
+    -fx-text-fill: rgba(28, 28, 28);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
 
-    -fx-shadow-highlight-color: transparent;
-    -fx-outer-border: transparent;
-    -fx-inner-border: transparent;
-    -fx-color: transparent;
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
+    -fx-border-color: #e3e3e3 #e3e3e3 #cacaca #e3e3e3;
+
+    -fx-background-color:
+            rgba(249, 249, 249),
+            rgba(249, 249, 249),
+            rgba(249, 249, 249),
+            rgba(249, 249, 249);
 }
-.ui-button:pressed {
-    -fx-text-fill: black;
-    -fx-body-color: white;
+.ui-button:focused {
+    -fx-background-color:
+            rgba(249, 249, 249),
+            rgba(249, 249, 249),
+            rgba(249, 249, 249),
+            rgba(249, 249, 249);
+}
+.ui-button:disabled {
+    -fx-opacity: 1;
+    -fx-text-fill: rgb(156, 156, 156);
+
+    -fx-border-color: #e3e3e3 #e3e3e3 #cacaca #e3e3e3;
+    -fx-background-color:
+            rgba(249, 249, 249),
+            rgba(249, 249, 249),
+            rgba(249, 249, 249),
+            rgba(249, 249, 249);
+
+}
+.ui-button:default {
+    -fx-background-color: #0066be #0066be #0066be #0066be;
+    -fx-border-color: transparent transparent #003e72 transparent;
+    -fx-text-fill: rgba(253, 253, 253);
+}
+.ui-button:default:hover {
+    -fx-background-color: #1975c5 #1975c5 #1975c5 #1975c5;
+    -fx-border-color: transparent transparent #003e72 transparent;
+
+}
+.ui-button:default:pressed {
+    -fx-background-color: #3183ca #3183ca #3183ca #3183ca;
+    -fx-border-color: transparent transparent transparent transparent;
+    -fx-text-fill: rgba(253, 253, 253, 0.7);
 }
