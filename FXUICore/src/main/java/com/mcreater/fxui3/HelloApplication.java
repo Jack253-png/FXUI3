@@ -79,9 +79,7 @@ public class HelloApplication extends Application {
         vbox.getChildren().addAll(label, button, checkBox);
 
         Pane p = new Pane(new HBox(rectangleRed, rectangleBlue), target, vbox);
-        HBox box = new HBox(new Pane(), new Pane(), p);
-        box.setSpacing(25);
-        box.setBackground(new Background(
+        p.setBackground(new Background(
                 new BackgroundFill(
                         Color.rgb(50, 50, 50),
                         CornerRadii.EMPTY,
@@ -89,7 +87,8 @@ public class HelloApplication extends Application {
                 )
         ));
 
-        Scene scene = new Scene(box, 320, 240);
+        Scene scene = new Scene(p, 320, 240);
+        scene.setFill(Color.rgb(50, 50, 50));
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

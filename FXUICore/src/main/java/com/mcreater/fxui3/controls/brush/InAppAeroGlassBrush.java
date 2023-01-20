@@ -1,5 +1,6 @@
 package com.mcreater.fxui3.controls.brush;
 
+import com.mcreater.fxui3.util.FXUtil;
 import javafx.application.Platform;
 import javafx.geometry.Point2D;
 import javafx.scene.SnapshotParameters;
@@ -14,15 +15,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
+import javax.management.OperationsException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Consumer;
 
 public class InAppAeroGlassBrush implements IBrush {
     private final List<Region> targetNodeList = new Vector<>();
+    private final Map<Region, Point2D> pointMap = new HashMap<>();
     InAppAeroGlassBrush() {
         new Thread(() -> {
             AtomicReference<Integer> offset = new AtomicReference<>();
@@ -49,6 +51,13 @@ public class InAppAeroGlassBrush implements IBrush {
             region.setBackground(null);
 
             Point2D point = region.localToScene(0, 0);
+            Point2D cache = pointMap.get(region);
+
+            if (cache == null) cache = new Point2D(-1, -1);
+            if (cache.getX() != point.getX() || cache.getY() != point.getY()) {
+                System.out.println(point);
+                pointMap.put(region, point);
+            }
 
             parent.getChildren().remove(region);
 
