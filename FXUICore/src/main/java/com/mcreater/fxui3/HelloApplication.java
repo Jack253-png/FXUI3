@@ -22,35 +22,55 @@ import javafx.stage.Stage;
 
 public class HelloApplication extends Application {
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
 
         UIButton button = new UIButton("Standard XAML Button");
         Label label = new Label();
 
+        Color red = Color.web("#f16d7a");
+        Color blue = Color.web("#b8f1ed");
+
         Rectangle rectangleRed = new Rectangle();
-        rectangleRed.setFill(Color.RED);
+        rectangleRed.setFill(red);
         rectangleRed.setWidth(100);
         rectangleRed.setHeight(100);
 
         Rectangle rectangleBlue = new Rectangle();
-        rectangleBlue.setFill(Color.BLUE);
+        rectangleBlue.setFill(blue);
         rectangleBlue.setWidth(100);
         rectangleBlue.setHeight(100);
 
-        VBox target = new VBox(new UIButton("test"), new UIButton("test"));
+        new Thread(() -> {
+            while (true) {
+                rectangleRed.setFill(rectangleRed.getFill() == red ? blue : red);
+                rectangleBlue.setFill(rectangleRed.getFill() == blue ? red : blue);
+                try {
+                    Thread.sleep(500);
+                }
+                catch (InterruptedException e) {
+
+                }
+            }
+        }).start();
+
+        UIButton button1 = new UIButton("test");
+        UIButton button2 = new UIButton("test");
+
+        button1.setTheme(ResourceProcessor.ThemeType.DARK);
+        button2.setTheme(ResourceProcessor.ThemeType.DARK);
+
+        VBox target = new VBox(button1, button2);
         target.setPrefWidth(300);
         target.setPrefHeight(200);
         target.setAlignment(Pos.CENTER);
         target.setSpacing(50);
+        IBrush.getInAppAeroGrassBrush().apply(target);
 
         UICheckBox checkBox = new UICheckBox("test");
 
-        button.setOnAction(event -> {
-            label.setText("Hello JavaFX Application!");
-            rectangleRed.setFill(Color.BLACK);
-        });
+        button.setOnAction(event -> label.setText("Hello JavaFX Application!"));
         button.setFont(new Font(null, 16));
         button.setWrapText(true);
 
@@ -59,7 +79,9 @@ public class HelloApplication extends Application {
         vbox.getChildren().addAll(label, button, checkBox);
 
         Pane p = new Pane(new HBox(rectangleRed, rectangleBlue), target, vbox);
-        p.setBackground(new Background(
+        HBox box = new HBox(new Pane(), new Pane(), p);
+        box.setSpacing(25);
+        box.setBackground(new Background(
                 new BackgroundFill(
                         Color.rgb(50, 50, 50),
                         CornerRadii.EMPTY,
@@ -67,11 +89,7 @@ public class HelloApplication extends Application {
                 )
         ));
 
-        Scene scene = new Scene(p, 320, 240);
-        long i1 = System.currentTimeMillis();
-        IBrush.getInAppAeroGrassBrush().apply(target);
-        long i2 = System.currentTimeMillis();
-        System.out.println(i2 - i1);
+        Scene scene = new Scene(box, 320, 240);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

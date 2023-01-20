@@ -3,6 +3,7 @@ package com.mcreater.fxui3.controls.base;
 import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.UIButton;
 import com.mcreater.fxui3.controls.converters.ThemeConverter;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.css.CssMetaData;
 import javafx.css.ParsedValue;

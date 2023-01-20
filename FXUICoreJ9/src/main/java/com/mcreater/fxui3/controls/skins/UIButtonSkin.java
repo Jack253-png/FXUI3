@@ -2,7 +2,6 @@ package com.mcreater.fxui3.controls.skins;
 
 import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.UIButton;
-import javafx.scene.control.skin.ButtonSkin;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -10,6 +9,8 @@ import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.control.skin.ButtonSkin;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -49,10 +50,10 @@ public class UIButtonSkin extends ButtonSkin {
     private static final int backgroundMod1GreyDark = 50;
     private static final int backgroundMod2GreyDark = 39;
 
-
     public UIButtonSkin(UIButton button) {
         super(button);
         button.themeProperty().addListener((observableValue, type, t1) -> genThemeChangeAnimation(button));
+        button.defaultButtonProperty().addListener((observableValue, aBoolean, t1) -> genThemeChangeAnimation(button));
 
         backgroundGrey = new SimpleIntegerProperty(button.getTheme() == ResourceProcessor.ThemeType.LIGHT ? backgroundStdGreyLight : backgroundStdGreyDark);
         backgroundGrey.addListener((observableValue, number, t1) -> button.setBackground(new Background(
@@ -83,121 +84,141 @@ public class UIButtonSkin extends ButtonSkin {
             button.setBorder(border);
         });
 
+        button.addEventFilter(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+            try {
+                Node target2 = mouseEvent.getPickResult().getIntersectedNode();
+                if (target2 == button || target2.getParent() == button) {
+                    mouseEvent.consume();
+                }
+            }
+            catch (Exception ignored) {
+
+            }
+        });
+
         button.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> genMouseEnterAnimation(button));
         button.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> genMouseExitAnimation(button));
         button.addEventHandler(MouseEvent.MOUSE_PRESSED, mouseEvent -> genMousePressedAnimation(button));
         button.addEventHandler(MouseEvent.MOUSE_RELEASED, mouseEvent -> genMouseEnterAnimation(button));
     }
     private void genThemeChangeAnimation(UIButton button) {
-        synchronized (lock) {
-            if (timeline != null) timeline.stop();
-            boolean isLight = button.getTheme() == ResourceProcessor.ThemeType.LIGHT;
+        if (!button.isDefaultButton()) {
+            synchronized (lock) {
+                if (timeline != null) timeline.stop();
+                boolean isLight = button.getTheme() == ResourceProcessor.ThemeType.LIGHT;
 
-            timeline = new Timeline(
-                    new KeyFrame(
-                            Duration.millis(button.getAnimationSpeed()),
-                            new KeyValue(
-                                    backgroundGrey,
-                                    isLight ? backgroundStdGreyLight : backgroundStdGreyDark,
-                                    Interpolator.EASE_BOTH
-                            ),
-                            new KeyValue(
-                                    textColorGrey,
-                                    isLight ? textStdColorGreyLight : textStdColorGreyDark,
-                                    Interpolator.EASE_BOTH
-                            ),
-                            new KeyValue(
-                                    borderButtomColorGrey,
-                                    isLight ? borderModColorGreyLight : borderModColorGreyDark,
-                                    Interpolator.EASE_BOTH
-                            )
-                    )
-            );
-            timeline.playFromStart();
+                timeline = new Timeline(
+                        new KeyFrame(
+                                Duration.millis(button.getAnimationSpeed()),
+                                new KeyValue(
+                                        backgroundGrey,
+                                        isLight ? backgroundStdGreyLight : backgroundStdGreyDark,
+                                        Interpolator.EASE_BOTH
+                                ),
+                                new KeyValue(
+                                        textColorGrey,
+                                        isLight ? textStdColorGreyLight : textStdColorGreyDark,
+                                        Interpolator.EASE_BOTH
+                                ),
+                                new KeyValue(
+                                        borderButtomColorGrey,
+                                        isLight ? borderModColorGreyLight : borderModColorGreyDark,
+                                        Interpolator.EASE_BOTH
+                                )
+                        )
+                );
+                timeline.playFromStart();
+            }
         }
     }
     private void genMouseEnterAnimation(UIButton button) {
-        synchronized (lock) {
-            if (timeline != null) timeline.stop();
-            boolean isLight = button.getTheme() == ResourceProcessor.ThemeType.LIGHT;
+        if (!button.isDefaultButton()) {
+            synchronized (lock) {
+                if (timeline != null) timeline.stop();
+                boolean isLight = button.getTheme() == ResourceProcessor.ThemeType.LIGHT;
 
-            timeline = new Timeline(
-                    new KeyFrame(
-                            Duration.millis(button.getAnimationSpeed()),
-                            new KeyValue(
-                                    backgroundGrey,
-                                    isLight ? backgroundMod1GreyLight : backgroundMod1GreyDark,
-                                    Interpolator.EASE_BOTH
-                            ),
-                            new KeyValue(
-                                    textColorGrey,
-                                    isLight ? textStdColorGreyLight : textStdColorGreyDark,
-                                    Interpolator.EASE_BOTH
-                            ),
-                            new KeyValue(
-                                    borderButtomColorGrey,
-                                    isLight ? borderModColorGreyLight : borderModColorGreyDark,
-                                    Interpolator.EASE_BOTH
-                            )
-                    )
-            );
-            timeline.playFromStart();
+                timeline = new Timeline(
+                        new KeyFrame(
+                                Duration.millis(button.getAnimationSpeed()),
+                                new KeyValue(
+                                        backgroundGrey,
+                                        isLight ? backgroundMod1GreyLight : backgroundMod1GreyDark,
+                                        Interpolator.EASE_BOTH
+                                ),
+                                new KeyValue(
+                                        textColorGrey,
+                                        isLight ? textStdColorGreyLight : textStdColorGreyDark,
+                                        Interpolator.EASE_BOTH
+                                ),
+                                new KeyValue(
+                                        borderButtomColorGrey,
+                                        isLight ? borderModColorGreyLight : borderModColorGreyDark,
+                                        Interpolator.EASE_BOTH
+                                )
+                        )
+                );
+                timeline.playFromStart();
+            }
         }
     }
     private void genMouseExitAnimation(UIButton button) {
-        synchronized (lock) {
-            if (timeline != null) timeline.stop();
-            boolean isLight = button.getTheme() == ResourceProcessor.ThemeType.LIGHT;
+        if (!button.isDefaultButton()) {
+            synchronized (lock) {
+                if (timeline != null) timeline.stop();
+                boolean isLight = button.getTheme() == ResourceProcessor.ThemeType.LIGHT;
 
-            timeline = new Timeline(
-                    new KeyFrame(
-                            Duration.millis(button.getAnimationSpeed()),
-                            new KeyValue(
-                                    backgroundGrey,
-                                    isLight ? backgroundStdGreyLight : backgroundStdGreyDark,
-                                    Interpolator.EASE_BOTH
-                            ),
-                            new KeyValue(
-                                    textColorGrey,
-                                    isLight ? textStdColorGreyLight : textStdColorGreyDark,
-                                    Interpolator.EASE_BOTH
-                            ),
-                            new KeyValue(
-                                    borderButtomColorGrey,
-                                    isLight ? borderModColorGreyLight : borderModColorGreyDark,
-                                    Interpolator.EASE_BOTH
-                            )
-                    )
-            );
-            timeline.playFromStart();
+                timeline = new Timeline(
+                        new KeyFrame(
+                                Duration.millis(button.getAnimationSpeed()),
+                                new KeyValue(
+                                        backgroundGrey,
+                                        isLight ? backgroundStdGreyLight : backgroundStdGreyDark,
+                                        Interpolator.EASE_BOTH
+                                ),
+                                new KeyValue(
+                                        textColorGrey,
+                                        isLight ? textStdColorGreyLight : textStdColorGreyDark,
+                                        Interpolator.EASE_BOTH
+                                ),
+                                new KeyValue(
+                                        borderButtomColorGrey,
+                                        isLight ? borderModColorGreyLight : borderModColorGreyDark,
+                                        Interpolator.EASE_BOTH
+                                )
+                        )
+                );
+                timeline.playFromStart();
+            }
         }
     }
     private void genMousePressedAnimation(UIButton button) {
-        synchronized (lock) {
-            if (timeline != null) timeline.stop();
-            boolean isLight = button.getTheme() == ResourceProcessor.ThemeType.LIGHT;
+        if (!button.isDefaultButton()) {
+            synchronized (lock) {
+                if (timeline != null) timeline.stop();
+                boolean isLight = button.getTheme() == ResourceProcessor.ThemeType.LIGHT;
 
-            timeline = new Timeline(
-                    new KeyFrame(
-                            Duration.millis(button.getAnimationSpeed()),
-                            new KeyValue(
-                                    backgroundGrey,
-                                    isLight ? backgroundMod2GreyLight : backgroundMod2GreyDark,
-                                    Interpolator.EASE_BOTH
-                            ),
-                            new KeyValue(
-                                    textColorGrey,
-                                    isLight ? textModColorGreyLight : textModColorGreyDark,
-                                    Interpolator.EASE_BOTH
-                            ),
-                            new KeyValue(
-                                    borderButtomColorGrey,
-                                    isLight ? borderStdColorGreyLight : borderStdColorGreyDark,
-                                    Interpolator.EASE_BOTH
-                            )
-                    )
-            );
-            timeline.playFromStart();
+                timeline = new Timeline(
+                        new KeyFrame(
+                                Duration.millis(button.getAnimationSpeed()),
+                                new KeyValue(
+                                        backgroundGrey,
+                                        isLight ? backgroundMod2GreyLight : backgroundMod2GreyDark,
+                                        Interpolator.EASE_BOTH
+                                ),
+                                new KeyValue(
+                                        textColorGrey,
+                                        isLight ? textModColorGreyLight : textModColorGreyDark,
+                                        Interpolator.EASE_BOTH
+                                ),
+                                new KeyValue(
+                                        borderButtomColorGrey,
+                                        isLight ? borderStdColorGreyLight : borderStdColorGreyDark,
+                                        Interpolator.EASE_BOTH
+                                )
+                        )
+                );
+                timeline.playFromStart();
+            }
         }
     }
 }
