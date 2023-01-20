@@ -1,5 +1,6 @@
 package com.mcreater.fxui3;
 
+import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.UIButton;
 import com.mcreater.fxui3.controls.UICheckBox;
 import com.mcreater.fxui3.controls.brush.IBrush;
@@ -21,7 +22,7 @@ import javafx.stage.Stage;
 
 public class HelloApplication extends Application {
     @Override
-    public void start(Stage stage) throws InterruptedException {
+    public void start(Stage stage) throws Exception {
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
 
@@ -42,13 +43,7 @@ public class HelloApplication extends Application {
         target.setPrefWidth(300);
         target.setPrefHeight(200);
         target.setAlignment(Pos.CENTER);
-        target.setBackground(new Background(
-                new BackgroundFill(
-                        Color.rgb(255, 255, 255, 0.75),
-                        CornerRadii.EMPTY,
-                        Insets.EMPTY
-                )
-        ));
+        target.setSpacing(50);
 
         UICheckBox checkBox = new UICheckBox("test");
 
@@ -59,15 +54,27 @@ public class HelloApplication extends Application {
         button.setFont(new Font(null, 16));
         button.setWrapText(true);
 
+        button.setTheme(ResourceProcessor.ThemeType.DARK);
+
         vbox.getChildren().addAll(label, button, checkBox);
 
         Pane p = new Pane(new HBox(rectangleRed, rectangleBlue), target, vbox);
+        p.setBackground(new Background(
+                new BackgroundFill(
+                        Color.rgb(50, 50, 50),
+                        CornerRadii.EMPTY,
+                        Insets.EMPTY
+                )
+        ));
 
         Scene scene = new Scene(p, 320, 240);
+        long i1 = System.currentTimeMillis();
+        IBrush.getInAppAeroGrassBrush().apply(target);
+        long i2 = System.currentTimeMillis();
+        System.out.println(i2 - i1);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
-        IBrush.getInAppAeroGrassBrush().apply(target);
     }
 
     public static void main(String[] args) {
