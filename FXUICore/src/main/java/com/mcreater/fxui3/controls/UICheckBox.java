@@ -12,6 +12,7 @@ import javafx.css.StyleableProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Skin;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,6 +36,7 @@ public class UICheckBox extends CheckBox implements IControl {
     public void initialize() {
         this.getStyleClass().add(DEFAULT_STYLE_CLASS);
     }
+    public void requestFocus() {}
     private final StyleableObjectProperty<ResourceProcessor.ThemeType> themeProperty = new SimpleStyleableObjectProperty<>(
             UICheckBox.StyleableProperties.THEME,
             UICheckBox.this,

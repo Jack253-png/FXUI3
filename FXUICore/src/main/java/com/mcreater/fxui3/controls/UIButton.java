@@ -39,6 +39,7 @@ public class UIButton extends Button implements IControl {
         super(text, graphic);
         initialize();
     }
+    public void requestFocus() {}
     public void initialize() {
         this.getStyleClass().add(DEFAULT_STYLE_CLASS);
     }

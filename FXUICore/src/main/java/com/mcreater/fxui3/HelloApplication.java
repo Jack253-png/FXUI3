@@ -4,7 +4,6 @@ import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.UIButton;
 import com.mcreater.fxui3.controls.UICheckBox;
 import com.mcreater.fxui3.controls.brush.IBrush;
-import com.mcreater.fxui3.util.FXUtil;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -59,6 +58,7 @@ public class HelloApplication extends Application {
         UIButton button1 = new UIButton("test");
         UIButton button2 = new UIButton("test");
         UICheckBox checkBox = new UICheckBox("test");
+        checkBox.setTheme(ResourceProcessor.ThemeType.DARK);
 
         button1.setTheme(ResourceProcessor.ThemeType.DARK);
         button2.setTheme(ResourceProcessor.ThemeType.DARK);

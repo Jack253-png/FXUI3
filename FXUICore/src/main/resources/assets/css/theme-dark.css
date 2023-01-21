@@ -45,15 +45,61 @@
     -fx-border-color: transparent transparent transparent transparent;
     -fx-text-fill: rgba(28, 28, 28, 0.7);
 }
+.ui-check-box {
+    -fx-text-fill: rgb(221, 221, 221);
+}
 .ui-check-box .box {
-    -fx-background-color: transparent transparent transparent transparent;
+    -fx-background-color: #1d1d1d #1d1d1d #1d1d1d #1d1d1d;
+    -fx-background-insets: 0 0 1 0;
+    -fx-border-color: #979797;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
 }
 .ui-check-box:hover .box {
-    -fx-background-color: transparent transparent transparent transparent;
+    -fx-background-color: #2a2a2a #2a2a2a #2a2a2a #2a2a2a;
 }
 .ui-check-box:pressed .box {
-    -fx-background-color: transparent transparent transparent transparent;
+    -fx-background-color: #303030 #303030 #303030 #303030;
+    -fx-border-color: #4a4a4a;
 }
 .ui-check-box:focused .box {
-    -fx-background-color: transparent transparent transparent transparent;
+    -fx-background-color: #1d1d1d #1d1d1d #1d1d1d #1d1d1d;
+    -fx-background-insets: 0 0 1 0;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+.ui-check-box:selected .box {
+    -fx-background-color: #4bbffc;
+    -fx-border-color: #4bbffc;
+}
+.ui-check-box:selected:hover .box {
+    -fx-background-color: #47b1e8;
+    -fx-border-color: #49b9f2;
+}
+.ui-check-box:selected:pressed .box {
+    -fx-background-color: #42a1d2;
+    -fx-border-color: #46aee4;
+}
+.ui-check-box:indeterminate .box {
+    -fx-padding: 0;
+    -fx-background-color: #4bbffc;
+    -fx-border-color: #4bbffc;
+}
+.ui-check-box:indeterminate:hover .box {
+    -fx-padding: 0;
+    -fx-background-color: #47b1e8;
+    -fx-border-color: #49b9f2;
+}
+.ui-check-box:indeterminate:pressed .box {
+    -fx-padding: 0;
+    -fx-background-color: #42a1d2;
+    -fx-border-color: #46aee4;
+}
+.ui-check-box .box .mark {
+    -fx-background-color: null;
+    -fx-shape: "M-0.25,6.083c0.843-0.758,4.583,4.833,5.75,4.833S14.5-1.5,15.917-0.917c1.292,0.532-8.75,17.083-10.5,17.083C3,16.167-1.083,6.833-0.25,6.083z";
+}
+.ui-check-box:indeterminate .box .mark {
+    -fx-shape: "M0,0H10V2H0Z";
+    -fx-scale-shape: false;
 }
