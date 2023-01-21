@@ -4,8 +4,6 @@ import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.base.IControl;
 import com.mcreater.fxui3.controls.converters.ThemeConverter;
 import com.mcreater.fxui3.controls.skins.UICheckBoxSkin;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.css.CssMetaData;
 import javafx.css.SimpleStyleableObjectProperty;
 import javafx.css.Styleable;
@@ -26,12 +24,12 @@ public class UICheckBox extends CheckBox implements IControl {
     private static final String DEFAULT_STYLE_CLASS = "ui-check-box";
     public UICheckBox() {
         super();
-
+        initialize();
     }
 
     public UICheckBox(String var1) {
         super(var1);
-
+        initialize();
     }
 
     public void initialize() {
@@ -61,7 +59,7 @@ public class UICheckBox extends CheckBox implements IControl {
                 new CssMetaData<UICheckBox, ResourceProcessor.ThemeType>("-ui-check-box-theme",
                         ThemeConverter.getInstance(), ResourceProcessor.ThemeType.LIGHT) {
                     public boolean isSettable(UICheckBox control) {
-                        return true;
+                        return !control.themeProperty.isBound();
                     }
                     public StyleableProperty<ResourceProcessor.ThemeType> getStyleableProperty(UICheckBox control) {
                         return control.themeProperty();

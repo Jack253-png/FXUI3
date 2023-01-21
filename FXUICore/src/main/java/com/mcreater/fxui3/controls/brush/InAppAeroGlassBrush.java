@@ -3,7 +3,6 @@ package com.mcreater.fxui3.controls.brush;
 import com.mcreater.fxui3.util.FXUtil;
 import javafx.application.Platform;
 import javafx.geometry.Point2D;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Background;
@@ -14,8 +13,8 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
-import javax.management.OperationsException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +33,8 @@ public class InAppAeroGlassBrush implements IBrush {
                         Platform.runLater(() -> offset.set(applyImpl(region, offset.get())));
                         Thread.sleep(10);
                     }
-                    catch (Exception e) {
-                        e.printStackTrace();
+                    catch (Exception ignored) {
+
                     }
                 });
             }
@@ -45,30 +44,26 @@ public class InAppAeroGlassBrush implements IBrush {
         targetNodeList.add(region);
     }
     private Integer applyImpl(Region region, Integer offset) {
+        return applyImpl(region, offset, Color.rgb(50, 50, 50));
+    }
+    private Integer applyImpl(Region region, Integer offset, Paint fill) {
         try {
-            Pane parent = (Pane) region.getScene().getRoot();
-            if (parent == null) throw new NullPointerException();
+            Pane parent = (Pane) FXUtil.getControlRoot(region);
             region.setBackground(null);
 
             Point2D point = region.localToScene(0, 0);
             Point2D cache = pointMap.get(region);
 
             if (cache == null) cache = new Point2D(-1, -1);
-            if (cache.getX() != point.getX() || cache.getY() != point.getY()) {
-                System.out.println(point);
-                pointMap.put(region, point);
-            }
+            if (cache.getX() != point.getX() || cache.getY() != point.getY()) pointMap.put(region, point);
 
-            parent.getChildren().remove(region);
+            region.setOpacity(0);
 
-            SnapshotParameters parameters = new SnapshotParameters();
-            parameters.setFill(Color.rgb(50, 50, 50));
-            parameters.setDepthBuffer(false);
             WritableImage result2 = null;
-            if (offset == null) result2 = parent.snapshot(parameters, null);
+            if (offset == null) result2 = parent.snapshot(null, null);
             parent.setEffect(new GaussianBlur(64));
-            WritableImage result = parent.snapshot(parameters, null);
-            parent.getChildren().add(region);
+            WritableImage result = parent.snapshot(null, null);
+            region.setOpacity(1);
             parent.setEffect(null);
 
             if (offset == null) {
@@ -94,8 +89,8 @@ public class InAppAeroGlassBrush implements IBrush {
             ));
             return offset;
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (Exception ignored) {
+
         }
         return null;
     }

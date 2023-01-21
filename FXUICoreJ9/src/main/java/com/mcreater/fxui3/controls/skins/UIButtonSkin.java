@@ -9,7 +9,6 @@ import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.skin.ButtonSkin;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -82,18 +81,6 @@ public class UIButtonSkin extends ButtonSkin {
             ));
 
             button.setBorder(border);
-        });
-
-        button.addEventFilter(MouseEvent.MOUSE_EXITED, mouseEvent -> {
-            try {
-                Node target2 = mouseEvent.getPickResult().getIntersectedNode();
-                if (target2 == button || target2.getParent() == button) {
-                    mouseEvent.consume();
-                }
-            }
-            catch (Exception ignored) {
-
-            }
         });
 
         button.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> genMouseEnterAnimation(button));

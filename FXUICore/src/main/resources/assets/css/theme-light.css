@@ -45,3 +45,15 @@
     -fx-border-color: transparent transparent transparent transparent;
     -fx-text-fill: rgba(253, 253, 253, 0.7);
 }
+.ui-check-box .box {
+    -fx-background-color: transparent transparent transparent transparent;
+}
+.ui-check-box:hover .box {
+    -fx-background-color: transparent transparent transparent transparent;
+}
+.ui-check-box:pressed .box {
+     -fx-background-color: transparent transparent transparent transparent;
+}
+.ui-check-box:focused .box {
+    -fx-background-color: transparent transparent transparent transparent;
+}

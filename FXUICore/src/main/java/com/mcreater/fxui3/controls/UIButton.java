@@ -4,8 +4,6 @@ import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.base.IControl;
 import com.mcreater.fxui3.controls.converters.ThemeConverter;
 import com.mcreater.fxui3.controls.skins.UIButtonSkin;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.css.CssMetaData;
 import javafx.css.ParsedValue;
 import javafx.css.SimpleStyleableIntegerProperty;
@@ -50,7 +48,7 @@ public class UIButton extends Button implements IControl {
             "theme",
             ResourceProcessor.ThemeType.LIGHT
     );
-    private static final StyleableIntegerProperty animationSpeedProperty = new SimpleStyleableIntegerProperty(
+    private final StyleableIntegerProperty animationSpeedProperty = new SimpleStyleableIntegerProperty(
             StyleableProperties.ANIMATION_SPEED,
             100
     );
@@ -82,7 +80,7 @@ public class UIButton extends Button implements IControl {
                 new CssMetaData<UIButton, ResourceProcessor.ThemeType>("-ui-button-theme",
                         ThemeConverter.getInstance(), ResourceProcessor.ThemeType.LIGHT) {
                     public boolean isSettable(UIButton control) {
-                        return true;
+                        return !control.themeProperty.isBound();
                     }
                     public StyleableProperty<ResourceProcessor.ThemeType> getStyleableProperty(UIButton control) {
                         return control.themeProperty();
@@ -102,7 +100,7 @@ public class UIButton extends Button implements IControl {
                             }
                         }, 100) {
                     public boolean isSettable(UIButton control) {
-                        return true;
+                        return !control.animationSpeedProperty.isBound();
                     }
                     public StyleableProperty<Number> getStyleableProperty(UIButton control) {
                         return control.animationSpeedProperty();

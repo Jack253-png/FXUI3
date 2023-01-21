@@ -4,6 +4,7 @@ import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.UIButton;
 import com.mcreater.fxui3.controls.UICheckBox;
 import com.mcreater.fxui3.controls.brush.IBrush;
+import com.mcreater.fxui3.util.FXUtil;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -57,18 +58,16 @@ public class HelloApplication extends Application {
 
         UIButton button1 = new UIButton("test");
         UIButton button2 = new UIButton("test");
+        UICheckBox checkBox = new UICheckBox("test");
 
         button1.setTheme(ResourceProcessor.ThemeType.DARK);
         button2.setTheme(ResourceProcessor.ThemeType.DARK);
 
-        VBox target = new VBox(button1, button2);
+        HBox target = new HBox(button1, button2, checkBox);
         target.setPrefWidth(300);
         target.setPrefHeight(200);
-        target.setAlignment(Pos.CENTER);
+        target.setAlignment(Pos.BOTTOM_LEFT);
         target.setSpacing(50);
-        IBrush.getInAppAeroGrassBrush().apply(target);
-
-        UICheckBox checkBox = new UICheckBox("test");
 
         button.setOnAction(event -> label.setText("Hello JavaFX Application!"));
         button.setFont(new Font(null, 16));
@@ -76,7 +75,7 @@ public class HelloApplication extends Application {
 
         button.setTheme(ResourceProcessor.ThemeType.DARK);
 
-        vbox.getChildren().addAll(label, button, checkBox);
+        vbox.getChildren().addAll(label, button);
 
         Pane p = new Pane(new HBox(rectangleRed, rectangleBlue), target, vbox);
         p.setBackground(new Background(
@@ -86,6 +85,8 @@ public class HelloApplication extends Application {
                         Insets.EMPTY
                 )
         ));
+
+        IBrush.getInAppAeroGrassBrush().apply(target);
 
         Scene scene = new Scene(p, 320, 240);
         scene.setFill(Color.rgb(50, 50, 50));

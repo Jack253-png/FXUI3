@@ -2,7 +2,6 @@ package com.mcreater.fxui3.controls.skins;
 
 import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.UIButton;
-import com.sun.javafx.event.EventDispatchChainImpl;
 import com.sun.javafx.scene.control.skin.ButtonSkin;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -10,10 +9,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.event.EventHandler;
-import javafx.event.EventTarget;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -85,18 +81,6 @@ public class UIButtonSkin extends ButtonSkin {
             ));
 
             button.setBorder(border);
-        });
-
-        button.addEventFilter(MouseEvent.MOUSE_EXITED, mouseEvent -> {
-            try {
-                Node target2 = mouseEvent.getPickResult().getIntersectedNode();
-                if (target2 == button || target2.getParent() == button) {
-                    mouseEvent.consume();
-                }
-            }
-            catch (Exception ignored) {
-
-            }
         });
 
         button.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> genMouseEnterAnimation(button));
