@@ -1,8 +1,8 @@
 package com.mcreater.fxui3.controls.brush;
 
-import com.mcreater.fxui3.util.FXUtil;
 import javafx.application.Platform;
 import javafx.geometry.Point2D;
+import javafx.scene.Parent;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Background;
@@ -10,10 +10,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 import java.util.HashMap;
 import java.util.List;
@@ -44,14 +41,12 @@ public class InAppAeroGlassBrush implements IBrush {
         targetNodeList.add(region);
     }
     private Integer applyImpl(Region region, Integer offset) {
-        return applyImpl(region, offset, Color.rgb(50, 50, 50));
-    }
-    private Integer applyImpl(Region region, Integer offset, Paint fill) {
         try {
-            Pane parent = (Pane) FXUtil.getControlRoot(region);
+//            Pane parent = (Pane) FXUtil.getControlRoot(region);
+            Parent parent = region.getParent();
             region.setBackground(null);
 
-            Point2D point = region.localToScene(0, 0);
+            Point2D point = region.localToParent(0, 0);
             Point2D cache = pointMap.get(region);
 
             if (cache == null) cache = new Point2D(-1, -1);
