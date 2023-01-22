@@ -12,7 +12,6 @@ import javafx.css.StyleableProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Skin;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Collections;

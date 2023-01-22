@@ -8,12 +8,17 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -77,7 +82,8 @@ public class HelloApplication extends Application {
 
         vbox.getChildren().addAll(label, button);
 
-        Pane p = new Pane(new HBox(rectangleRed, rectangleBlue), target, vbox);
+        Pane p = new Pane();
+        p.getChildren().addAll(new HBox(rectangleRed, rectangleBlue), target, vbox);
         p.setBackground(new Background(
                 new BackgroundFill(
                         Color.rgb(50, 50, 50),
