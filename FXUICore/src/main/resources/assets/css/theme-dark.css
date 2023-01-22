@@ -2,6 +2,7 @@
     -fx-text-fill: rgb(253, 253, 253);
     -fx-background-radius: 5;
     -fx-border-radius: 5;
+    -fx-font-size: 14;
 
     -fx-border-color: #353535 #353535 #303030 #353535;
 
@@ -47,6 +48,7 @@
 }
 .ui-check-box {
     -fx-text-fill: rgb(221, 221, 221);
+    -fx-font-size: 14;
 }
 .ui-check-box .box {
     -fx-background-color: #1d1d1d #1d1d1d #1d1d1d #1d1d1d;
@@ -96,10 +98,20 @@
     -fx-border-color: #46aee4;
 }
 .ui-check-box .box .mark {
-    -fx-background-color: null;
-    -fx-shape: "M-0.25,6.083c0.843-0.758,4.583,4.833,5.75,4.833S14.5-1.5,15.917-0.917c1.292,0.532-8.75,17.083-10.5,17.083C3,16.167-1.083,6.833-0.25,6.083z";
+    -fx-background-color: transparent;
+    /*-fx-shape: "M-0.25,6.083c0.843-0.758,4.583,4.833,5.75,4.833S14.5-1.5,15.917-0.917c1.292,0.532-8.75,17.083-10.5,17.083C3,16.167-1.083,6.833-0.25,6.083z";*/
+    -fx-shape: "";
+    -fx-opacity: 0;
 }
 .ui-check-box:indeterminate .box .mark {
-    -fx-shape: "M0,0H10V2H0Z";
+    /*-fx-shape: "M0,0H10V2H0Z";*/
+    -fx-shape: "";
     -fx-scale-shape: false;
+    -fx-opacity: 0;
+}
+.ui-check-box .check-left {
+    -fx-fill: whitesmoke;
+}
+.ui-check-box .check-right {
+    -fx-fill: whitesmoke;
 }
