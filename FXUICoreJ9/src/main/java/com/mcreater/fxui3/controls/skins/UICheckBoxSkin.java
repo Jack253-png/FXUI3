@@ -3,30 +3,22 @@ package com.mcreater.fxui3.controls.skins;
 import com.mcreater.fxui3.controls.UICheckBox;
 import javafx.animation.Timeline;
 import javafx.scene.control.skin.CheckBoxSkin;
-import javafx.scene.layout.Region;
 import javafx.scene.shape.Line;
 
-import java.lang.reflect.Field;
-
 public class UICheckBoxSkin extends CheckBoxSkin {
-    private Line checkLeft;
-    private Line checkRight;
+    private final Line checkLeft;
+    private final Line checkRight;
     private Timeline checkOutAnimation;
     public UICheckBoxSkin(UICheckBox checkBox) {
         super(checkBox);
 
-        checkLeft = new Line(5, 11, 9, 15);
-
-        checkRight = new Line(9, 15, 16, 8);
+        checkLeft = new Line(6, 11, 9, 14);
+        checkLeft.setStrokeWidth(1.5);
+        checkLeft.getStyleClass().add("check-line");
+        checkRight = new Line(9, 14, 15, 8);
+        checkRight.setStrokeWidth(1.5);
+        checkRight.getStyleClass().add("check-line");
 
         this.getChildren().addAll(checkLeft, checkRight);
-        try {
-            Field field = CheckBoxSkin.class.getDeclaredField("box");
-            field.setAccessible(true);
-            ((Region) field.get(this)).setPrefSize(22, 22);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -8,25 +8,21 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 
 import javax.imageio.ImageIO;
 import java.io.File;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Consumer;
 
 public class InAppAeroGlassBrush implements IBrush {
     private final List<Region> targetNodeList = new Vector<>();
@@ -35,15 +31,20 @@ public class InAppAeroGlassBrush implements IBrush {
         new Thread(() -> {
             AtomicReference<Integer> offset = new AtomicReference<>();
             while (true) {
-                targetNodeList.forEach(region -> {
-                    try {
-                        Platform.runLater(() -> offset.set(applyImpl(region, offset.get())));
-                        Thread.sleep(10);
+                try {
+                    for (Region region : targetNodeList) {
+                        CountDownLatch latch = new CountDownLatch(1);
+                        Platform.runLater(() -> {
+                            offset.set(applyImpl(region, offset.get()));
+                            latch.countDown();
+                        });
+                        latch.await();
                     }
-                    catch (Exception ignored) {
+                    Thread.sleep(10);
+                }
+                catch (Exception ignored) {
 
-                    }
-                });
+                }
             }
         }).start();
     }

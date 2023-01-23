@@ -4,26 +4,27 @@ import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.UIButton;
 import com.mcreater.fxui3.controls.UICheckBox;
 import com.mcreater.fxui3.controls.brush.IBrush;
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class HelloApplication extends Application {
     @Override
@@ -74,7 +75,10 @@ public class HelloApplication extends Application {
         target.setAlignment(Pos.BOTTOM_LEFT);
         target.setSpacing(50);
 
-        button.setOnAction(event -> label.setText("Hello JavaFX Application!"));
+        button.setOnAction(event -> {
+            System.gc();
+            label.setText("Hello JavaFX Application!");
+        });
         button.setFont(new Font(null, 16));
         button.setWrapText(true);
 
@@ -91,6 +95,28 @@ public class HelloApplication extends Application {
                         Insets.EMPTY
                 )
         ));
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(
+                        Duration.ZERO,
+                        new KeyValue(
+                                target.layoutXProperty(),
+                                0,
+                                Interpolator.EASE_BOTH
+                        )
+                ),
+                new KeyFrame(
+                        Duration.seconds(1),
+                        new KeyValue(
+                                target.layoutXProperty(),
+                                100,
+                                Interpolator.EASE_BOTH
+                        )
+                )
+        );
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.setAutoReverse(true);
+//        timeline.playFromStart();
 
         IBrush.getInAppAeroGrassBrush().apply(target);
 
