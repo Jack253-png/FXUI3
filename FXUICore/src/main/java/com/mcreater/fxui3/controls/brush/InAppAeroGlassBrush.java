@@ -26,12 +26,11 @@ import javafx.scene.paint.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class InAppAeroGlassBrush implements IBrush {
-    private final List<Region> targetNodeList = new Vector<>();
+    private final Map<Region, Parent> targetNodeList = new HashMap<>();
     private final Map<Region, Point2D> pointMap = new HashMap<>();
     private final ObjectProperty<Color> glassColorProperty = new SimpleObjectProperty<>(Color.TRANSPARENT);
     public ObjectProperty<Color> glassColorProperty() {
@@ -48,10 +47,10 @@ public class InAppAeroGlassBrush implements IBrush {
             AtomicReference<Integer> offset = new AtomicReference<>();
             while (true) {
                 try {
-                    for (Region region : targetNodeList) {
+                    for (Region region : targetNodeList.keySet()) {
                         CountDownLatch latch = new CountDownLatch(1);
                         Platform.runLater(() -> {
-                            offset.set(applyImpl(region, offset.get(), getGlassColor()));
+                            offset.set(applyImpl(region, offset.get(), getGlassColor(), targetNodeList.get(region)));
                             latch.countDown();
                         });
                         latch.await();
@@ -59,13 +58,17 @@ public class InAppAeroGlassBrush implements IBrush {
                     Thread.sleep(10);
                 }
                 catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                 }
             }
         }).start();
     }
     public void apply(Region region) {
-        targetNodeList.add(region);
+        apply(region, null);
+    }
+
+    public void apply(Region region, Parent parent) {
+        targetNodeList.put(region, parent);
     }
 
     public void remove(Region region) {
@@ -73,13 +76,13 @@ public class InAppAeroGlassBrush implements IBrush {
         targetNodeList.remove(region);
     }
 
-    private Integer applyImpl(Region region, Integer offset, Color glassColor) {
+    private Integer applyImpl(Region region, Integer offset, Color glassColor, Parent parent2) {
         try {
 //            Pane parent = (Pane) FXUtil.getControlRoot(region);
-            Parent parent = region.getParent();
+            Parent parent = parent2 != null ? parent2 : region.getParent();
             region.setBackground(null);
 
-            Point2D point = region.localToParent(0, 0);
+            Point2D point = parent2 != null ? FXUtil.localToParent(region, parent2) : region.localToParent(0, 0);
             Point2D cache = pointMap.get(region);
 
             if (cache == null) cache = new Point2D(-1, -1);
@@ -142,7 +145,7 @@ public class InAppAeroGlassBrush implements IBrush {
             return offset;
         }
         catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return null;
     }

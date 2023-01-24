@@ -1,5 +1,6 @@
 package com.mcreater.fxui3.util;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.DialogPane;
@@ -7,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+import javax.management.OperationsException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -31,6 +33,18 @@ public class FXUtil {
         else {
             if (parent.getParent() != null) return getTopNode(parent);
             return new Vector<>();
+        }
+    }
+    public static Point2D localToParent(Node target, Parent parent) throws Exception {
+        if (target.getParent() == null) {
+            if (target != parent) throw new OperationsException();
+            return target.localToScene(0, 0);
+        }
+        else {
+            if (target == parent) return new Point2D(0, 0);
+            Point2D parentPoint = localToParent(target.getParent(), parent);
+            Point2D currentPoint = target.localToParent(0, 0);
+            return new Point2D(parentPoint.getX() + currentPoint.getX(), parentPoint.getY() + currentPoint.getY());
         }
     }
 }
