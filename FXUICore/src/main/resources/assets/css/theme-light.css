@@ -106,5 +106,5 @@
     -fx-opacity: 0;
 }
 .ui-check-box .check-line {
-    -fx-stroke: whitesmoke;
+    -fx-stroke: #fdfdfd;
 }
