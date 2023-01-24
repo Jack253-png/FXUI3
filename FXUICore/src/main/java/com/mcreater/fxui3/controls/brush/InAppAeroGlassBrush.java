@@ -2,7 +2,6 @@ package com.mcreater.fxui3.controls.brush;
 
 import com.mcreater.fxui3.util.FXUtil;
 import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -15,8 +14,6 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Region;
 
-import javax.imageio.ImageIO;
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,15 +74,6 @@ public class InAppAeroGlassBrush implements IBrush {
             WritableImage result = parent.snapshot(null, null);
             opacityMap.forEach(Node::setOpacity);
             parent.setEffect(null);
-
-            if (result2 != null) {
-                try {
-                    ImageIO.write(SwingFXUtils.fromFXImage(result2, null), "png", new File("bg.png"));
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
 
             if (offset == null) {
                 offset = (int) (result.getWidth() - result2.getWidth()) / 2;
