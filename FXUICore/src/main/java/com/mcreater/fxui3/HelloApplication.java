@@ -116,6 +116,7 @@ public class HelloApplication extends Application {
         timeline.setAutoReverse(true);
 //        timeline.playFromStart();
 
+        IBrush.getInAppAeroGrassBrush().setGlassColor(Color.rgb(50, 50, 50, 0.25));
         IBrush.getInAppAeroGrassBrush().apply(target);
 
         Scene scene = new Scene(p, 320, 240);

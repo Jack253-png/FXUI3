@@ -2,6 +2,8 @@ package com.mcreater.fxui3.controls.brush;
 
 import com.mcreater.fxui3.util.FXUtil;
 import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -31,6 +33,16 @@ import java.util.concurrent.atomic.AtomicReference;
 public class InAppAeroGlassBrush implements IBrush {
     private final List<Region> targetNodeList = new Vector<>();
     private final Map<Region, Point2D> pointMap = new HashMap<>();
+    private final ObjectProperty<Color> glassColorProperty = new SimpleObjectProperty<>(Color.TRANSPARENT);
+    public ObjectProperty<Color> glassColorProperty() {
+        return glassColorProperty;
+    }
+    public void setGlassColor(Color color) {
+        glassColorProperty().set(color);
+    }
+    public Color getGlassColor() {
+        return glassColorProperty().get();
+    }
     InAppAeroGlassBrush() {
         new Thread(() -> {
             AtomicReference<Integer> offset = new AtomicReference<>();
@@ -39,7 +51,7 @@ public class InAppAeroGlassBrush implements IBrush {
                     for (Region region : targetNodeList) {
                         CountDownLatch latch = new CountDownLatch(1);
                         Platform.runLater(() -> {
-                            offset.set(applyImpl(region, offset.get()));
+                            offset.set(applyImpl(region, offset.get(), getGlassColor()));
                             latch.countDown();
                         });
                         latch.await();
@@ -61,7 +73,7 @@ public class InAppAeroGlassBrush implements IBrush {
         targetNodeList.remove(region);
     }
 
-    private Integer applyImpl(Region region, Integer offset) {
+    private Integer applyImpl(Region region, Integer offset, Color glassColor) {
         try {
 //            Pane parent = (Pane) FXUtil.getControlRoot(region);
             Parent parent = region.getParent();
@@ -80,6 +92,8 @@ public class InAppAeroGlassBrush implements IBrush {
             List<Node> topNodes = FXUtil.getTopNode(region);
             topNodes.forEach(node -> opacityMap.put(node, node.getOpacity()));
             topNodes.forEach(node -> node.setOpacity(0));
+            SnapshotParameters parameters = new SnapshotParameters();
+            parameters.setFill(Color.TRANSPARENT);
 
             WritableImage result2 = null;
             if (offset == null) result2 = parent.snapshot(null, null);
@@ -104,7 +118,7 @@ public class InAppAeroGlassBrush implements IBrush {
             topPane.setPrefSize(image.getWidth(), image.getHeight());
             topPane.setBackground(new Background(
                     new BackgroundFill(
-                            Color.rgb(220, 220, 220, 0.25),
+                            glassColor,
                             CornerRadii.EMPTY,
                             Insets.EMPTY
                     )
@@ -114,8 +128,6 @@ public class InAppAeroGlassBrush implements IBrush {
             view.setFitHeight(image.getHeight());
 
             Pane res = new Pane(view, topPane);
-            SnapshotParameters parameters = new SnapshotParameters();
-            parameters.setFill(Color.TRANSPARENT);
             image = res.snapshot(parameters, null);
 
             region.setBackground(new Background(
