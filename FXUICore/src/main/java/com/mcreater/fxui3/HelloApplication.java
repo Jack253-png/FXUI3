@@ -70,8 +70,6 @@ public class HelloApplication extends Application {
         button2.setTheme(ResourceProcessor.ThemeType.DARK);
 
         HBox target = new HBox(button1, button2, checkBox);
-        target.setPrefWidth(300);
-        target.setPrefHeight(200);
         target.setAlignment(Pos.BOTTOM_LEFT);
         target.setSpacing(50);
 
@@ -121,6 +119,8 @@ public class HelloApplication extends Application {
         IBrush.getInAppAeroGrassBrush().apply(target);
 
         Scene scene = new Scene(p, 320, 240);
+        target.prefWidthProperty().bind(scene.widthProperty());
+        target.prefHeightProperty().bind(scene.heightProperty());
         scene.setFill(Color.rgb(50, 50, 50));
         stage.setTitle("Hello!");
         stage.setScene(scene);

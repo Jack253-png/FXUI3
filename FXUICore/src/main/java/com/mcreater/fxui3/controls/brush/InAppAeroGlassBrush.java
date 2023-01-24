@@ -2,17 +2,24 @@ package com.mcreater.fxui3.controls.brush;
 
 import com.mcreater.fxui3.util.FXUtil;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.List;
@@ -39,8 +46,8 @@ public class InAppAeroGlassBrush implements IBrush {
                     }
                     Thread.sleep(10);
                 }
-                catch (Exception ignored) {
-
+                catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -48,6 +55,12 @@ public class InAppAeroGlassBrush implements IBrush {
     public void apply(Region region) {
         targetNodeList.add(region);
     }
+
+    public void remove(Region region) {
+        region.setBackground(null);
+        targetNodeList.remove(region);
+    }
+
     private Integer applyImpl(Region region, Integer offset) {
         try {
 //            Pane parent = (Pane) FXUtil.getControlRoot(region);
@@ -87,6 +100,24 @@ public class InAppAeroGlassBrush implements IBrush {
                     (int) (result.getHeight() - point.getY() - offset)
             );
 
+            Pane topPane = new Pane();
+            topPane.setPrefSize(image.getWidth(), image.getHeight());
+            topPane.setBackground(new Background(
+                    new BackgroundFill(
+                            Color.rgb(220, 220, 220, 0.25),
+                            CornerRadii.EMPTY,
+                            Insets.EMPTY
+                    )
+            ));
+            ImageView view = new ImageView(image);
+            view.setFitWidth(image.getWidth());
+            view.setFitHeight(image.getHeight());
+
+            Pane res = new Pane(view, topPane);
+            SnapshotParameters parameters = new SnapshotParameters();
+            parameters.setFill(Color.TRANSPARENT);
+            image = res.snapshot(parameters, null);
+
             region.setBackground(new Background(
                     new BackgroundImage(
                             image,
@@ -98,8 +129,8 @@ public class InAppAeroGlassBrush implements IBrush {
             ));
             return offset;
         }
-        catch (Exception ignored) {
-
+        catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

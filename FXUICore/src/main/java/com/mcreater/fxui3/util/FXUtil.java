@@ -15,6 +15,7 @@ public class FXUtil {
     private static final List<Class<? extends Pane>> ignoreClassList = Arrays.asList(Pane.class, AnchorPane.class, BorderPane.class, DialogPane.class);
     public static List<Node> getTopNode(Node node) {
         Parent parent = node.getParent();
+        if (parent == null) return new Vector<>();
         if (ignoreClassList.contains(parent.getClass())) {
             List<Node> result = new Vector<>();
             Pane parentPane = (Pane) parent;
