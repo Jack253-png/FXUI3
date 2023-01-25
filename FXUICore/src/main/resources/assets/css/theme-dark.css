@@ -110,3 +110,6 @@
 .ui-check-box .check-line {
     -fx-stroke: black;
 }
+.ui-check-box:pressed .check-line {
+    -fx-stroke: rgba(0, 0, 0, 0.65);
+}
