@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
-import javax.management.OperationsException;
+import javax.naming.OperationNotSupportedException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -37,7 +37,7 @@ public class FXUtil {
     }
     public static Point2D localToParent(Node target, Parent parent) throws Exception {
         if (target.getParent() == null) {
-            if (target != parent) throw new OperationsException();
+            if (target != parent) throw new OperationNotSupportedException("Parent not found.");
             return target.localToScene(0, 0);
         }
         else {

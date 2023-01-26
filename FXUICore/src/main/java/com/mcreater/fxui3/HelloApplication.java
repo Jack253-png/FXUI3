@@ -10,9 +10,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -25,6 +28,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.util.Arrays;
 
 public class HelloApplication extends Application {
     @Override
@@ -82,7 +87,7 @@ public class HelloApplication extends Application {
 
         button.setTheme(ResourceProcessor.ThemeType.DARK);
 
-        vbox.getChildren().addAll(label, button);
+        vbox.getChildren().addAll(label, button, new ChoiceBox<>(FXCollections.observableList(Arrays.asList("a", "b", "c"))), new ComboBox<>(FXCollections.observableList(Arrays.asList("a", "b", "c"))));
 
         Pane p = new Pane();
         p.getChildren().addAll(new HBox(rectangleRed, rectangleBlue), target, vbox);
