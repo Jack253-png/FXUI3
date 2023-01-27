@@ -70,30 +70,18 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
-.ui-check-box:selected .box {
-    -fx-background-color: #4bbffc;
-    -fx-border-color: #4bbffc;
-}
-.ui-check-box:selected:hover .box {
-    -fx-background-color: #47b1e8;
-    -fx-border-color: #49b9f2;
-}
-.ui-check-box:selected:pressed .box {
-    -fx-background-color: #42a1d2;
-    -fx-border-color: #46aee4;
-}
+.ui-check-box:selected .box,
 .ui-check-box:indeterminate .box {
-    -fx-padding: 0;
     -fx-background-color: #4bbffc;
     -fx-border-color: #4bbffc;
 }
+.ui-check-box:selected:hover .box,
 .ui-check-box:indeterminate:hover .box {
-    -fx-padding: 0;
     -fx-background-color: #47b1e8;
     -fx-border-color: #49b9f2;
 }
+.ui-check-box:selected:pressed .box,
 .ui-check-box:indeterminate:pressed .box {
-    -fx-padding: 0;
     -fx-background-color: #42a1d2;
     -fx-border-color: #46aee4;
 }
@@ -112,4 +100,17 @@
 }
 .ui-check-box:pressed .check-line {
     -fx-stroke: rgba(0, 0, 0, 0.65);
+}
+.ui-check-box:disabled {
+    -fx-opacity: 1;
+    -fx-text-fill: rgb(119, 119, 119);
+}
+.ui-check-box:disabled .box {
+    -fx-background-color: #303030 #303030 #303030 #303030;
+    -fx-border-color: #4a4a4a;
+}
+.ui-check-box:selected:disabled .box,
+.ui-check-box:indeterminate:disabled .box {
+    -fx-background-color: #42a1d2;
+    -fx-border-color: #46aee4;
 }

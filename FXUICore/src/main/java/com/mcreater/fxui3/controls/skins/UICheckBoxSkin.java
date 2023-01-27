@@ -1,6 +1,7 @@
 package com.mcreater.fxui3.controls.skins;
 
 import com.mcreater.fxui3.controls.UICheckBox;
+import com.mcreater.fxui3.util.ReflectHelper;
 import com.sun.javafx.scene.control.skin.CheckBoxSkin;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -8,6 +9,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 

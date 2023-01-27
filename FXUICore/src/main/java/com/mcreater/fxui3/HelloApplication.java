@@ -4,6 +4,7 @@ import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.UIButton;
 import com.mcreater.fxui3.controls.UICheckBox;
 import com.mcreater.fxui3.controls.brush.IBrush;
+import com.mcreater.fxui3.controls.brush.InAppAeroGlassBrush;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -11,6 +12,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.css.PseudoClass;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -121,8 +123,7 @@ public class HelloApplication extends Application {
         timeline.setAutoReverse(true);
 //        timeline.playFromStart();
 
-        IBrush.getInAppAeroGrassBrush().setGlassColor(Color.rgb(50, 50, 50, 0.25));
-        IBrush.getInAppAeroGrassBrush().apply(target);
+        IBrush.getInAppAeroGrassBrush().apply(target, Color.rgb(50, 50, 50, 0.25));
 
         Scene scene = new Scene(p, 320, 240);
         target.prefWidthProperty().bind(scene.widthProperty());

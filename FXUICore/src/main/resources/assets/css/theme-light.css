@@ -70,27 +70,17 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
-.ui-check-box:selected .box {
-    -fx-background-color: #0066be;
-    -fx-border-color: #0066be;
-}
-.ui-check-box:selected:hover .box {
-    -fx-background-color: #1975c5;
-    -fx-border-color: #0e6ec2;
-}
-.ui-check-box:selected:pressed .box {
-    -fx-background-color: #3183ca;
-    -fx-border-color: #1d77c5;
-}
+.ui-check-box:selected .box,
 .ui-check-box:indeterminate .box {
-    -fx-padding: 0;
     -fx-background-color: #0066be;
     -fx-border-color: #0066be;
 }
+.ui-check-box:selected:hover .box,
 .ui-check-box:indeterminate:hover .box {
     -fx-background-color: #1975c5;
     -fx-border-color: #0e6ec2;
 }
+.ui-check-box:selected:pressed .box,
 .ui-check-box:indeterminate:pressed .box {
     -fx-background-color: #3183ca;
     -fx-border-color: #1d77c5;
@@ -110,4 +100,17 @@
 }
 .ui-check-box:pressed .check-line {
     -fx-stroke: rgba(253, 253, 253, 0.65);
+}
+.ui-check-box:disabled {
+    -fx-opacity: 1;
+    -fx-text-fill: rgb(156, 156, 156);
+}
+.ui-check-box:disabled .box {
+    -fx-background-color: #dcdcdc #dcdcdc #dcdcdc #dcdcdc;
+    -fx-border-color: #b6b6b6;
+}
+.ui-check-box:selected:disabled .box,
+.ui-check-box:indeterminate:disabled .box {
+    -fx-background-color: #3183ca;
+    -fx-border-color: #1d77c5;
 }

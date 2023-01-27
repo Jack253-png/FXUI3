@@ -2,8 +2,6 @@ package com.mcreater.fxui3.controls.brush;
 
 import com.mcreater.fxui3.util.FXUtil;
 import javafx.application.Platform;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -26,22 +24,15 @@ import javafx.scene.paint.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class InAppAeroGlassBrush implements IBrush {
+    protected static final IBrush INSTANCE = new InAppAeroGlassBrush();
     private final Map<Region, Parent> targetNodeList = new HashMap<>();
-    private final Map<Region, Point2D> pointMap = new HashMap<>();
-    private final ObjectProperty<Color> glassColorProperty = new SimpleObjectProperty<>(Color.TRANSPARENT);
-    public ObjectProperty<Color> glassColorProperty() {
-        return glassColorProperty;
-    }
-    public void setGlassColor(Color color) {
-        glassColorProperty().set(color);
-    }
-    public Color getGlassColor() {
-        return glassColorProperty().get();
-    }
+    private final Map<Region, Color> colorMap = new HashMap<>();
+    private final Map<Region, Background> backgroundBuf = new HashMap<>();
     InAppAeroGlassBrush() {
         new Thread(() -> {
             AtomicReference<Integer> offset = new AtomicReference<>();
@@ -50,7 +41,8 @@ public class InAppAeroGlassBrush implements IBrush {
                     for (Region region : targetNodeList.keySet()) {
                         CountDownLatch latch = new CountDownLatch(1);
                         Platform.runLater(() -> {
-                            offset.set(applyImpl(region, offset.get(), getGlassColor(), targetNodeList.get(region)));
+                            Integer newOffset = applyImpl(region, offset.get(), colorMap.get(region), targetNodeList.get(region));
+                            if (!Objects.equals(newOffset, offset.get())) offset.set(newOffset);
                             latch.countDown();
                         });
                         latch.await();
@@ -64,29 +56,38 @@ public class InAppAeroGlassBrush implements IBrush {
         }).start();
     }
     public void apply(Region region) {
-        apply(region, null);
+        apply(region, null, Color.TRANSPARENT);
+    }
+
+    public void apply(Region region, Color glassColor) {
+        apply(region, null, glassColor);
     }
 
     public void apply(Region region, Parent parent) {
+        apply(region, parent, Color.TRANSPARENT);
+    }
+
+    public void apply(Region region, Parent parent, Color glassColor) {
         targetNodeList.put(region, parent);
+        colorMap.put(region, glassColor);
+        backgroundBuf.put(region, region.getBackground());
     }
 
     public void remove(Region region) {
-        region.setBackground(null);
+        region.setBackground(backgroundBuf.get(region));
         targetNodeList.remove(region);
+        colorMap.remove(region);
+        backgroundBuf.remove(region);
     }
 
     private Integer applyImpl(Region region, Integer offset, Color glassColor, Parent parent2) {
         try {
 //            Pane parent = (Pane) FXUtil.getControlRoot(region);
+            if (glassColor == null) glassColor = Color.TRANSPARENT;
             Parent parent = parent2 != null ? parent2 : region.getParent();
             region.setBackground(null);
 
             Point2D point = parent2 != null ? FXUtil.localToParent(region, parent2) : region.localToParent(0, 0);
-            Point2D cache = pointMap.get(region);
-
-            if (cache == null) cache = new Point2D(-1, -1);
-            if (cache.getX() != point.getX() || cache.getY() != point.getY()) pointMap.put(region, point);
 
             Map<Node, Double> opacityMap = new HashMap<>();
             opacityMap.put(region, region.getOpacity());
