@@ -67,7 +67,7 @@ public class UICheckBoxSkin extends CheckBoxSkin {
                         )
                 ),
                 new KeyFrame(
-                        Duration.millis(250),
+                        Duration.millis(150),
                         new KeyValue(
                                 checkLeft.endXProperty(),
                                 checkLeftStartPoint.getX() + checkLeftAdd,
@@ -100,10 +100,7 @@ public class UICheckBoxSkin extends CheckBoxSkin {
         );
 
         updateCheckBoxState();
-
         checkBox.setOnAction(actionEvent -> updateCheckBoxState());
-        checkBox.setAllowIndeterminate(true);
-
         topContainer.getChildren().addAll(checkLeft, checkRight);
 
         this.getChildren().addAll(topContainer, checkIndeterminate);

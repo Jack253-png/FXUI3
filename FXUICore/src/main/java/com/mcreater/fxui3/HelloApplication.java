@@ -62,7 +62,7 @@ public class HelloApplication extends Application {
                 try {
                     Thread.sleep(500);
                 }
-                catch (InterruptedException e) {
+                catch (InterruptedException ignored) {
 
                 }
             }
