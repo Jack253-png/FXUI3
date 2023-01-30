@@ -3,12 +3,16 @@ package com.mcreater.fxui3.util;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.DialogPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import javax.naming.OperationNotSupportedException;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;

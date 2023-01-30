@@ -33,18 +33,18 @@
 
 }
 .ui-button:default {
+    -fx-text-fill: rgba(28, 28, 28);
     -fx-background-color: #4bc0fd #4bc0fd #4bc0fd #4bc0fd;
     -fx-border-color: transparent transparent #40a0d1 transparent;
-    -fx-text-fill: rgba(28, 28, 28);
 }
 .ui-button:default:hover {
     -fx-background-color: #47b1e8 #47b1e8 #47b1e8 #47b1e8;
     -fx-border-color: transparent transparent #40a0d1 transparent;
 }
 .ui-button:default:pressed {
+    -fx-text-fill: rgba(28, 28, 28, 0.7);
     -fx-background-color: #42a1d2 #42a1d2 #42a1d2 #42a1d2;
     -fx-border-color: transparent transparent transparent transparent;
-    -fx-text-fill: rgba(28, 28, 28, 0.7);
 }
 .ui-check-box {
     -fx-text-fill: rgb(221, 221, 221);

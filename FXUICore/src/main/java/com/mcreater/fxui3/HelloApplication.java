@@ -4,7 +4,6 @@ import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.UIButton;
 import com.mcreater.fxui3.controls.UICheckBox;
 import com.mcreater.fxui3.controls.brush.IBrush;
-import com.mcreater.fxui3.controls.brush.InAppAeroGlassBrush;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -12,7 +11,6 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.css.PseudoClass;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -136,6 +134,17 @@ public class HelloApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+
+        /* light */
+//        Color color = Color.rgb(0, 102, 190).interpolate(Color.rgb(253, 253, 253), 0.1).interpolate(Color.rgb(253, 253, 253), 0.1);
+//        Color color = Color.rgb(0, 102, 190).interpolate(Color.BLACK, 0.4);
+//        Color color = Color.rgb(0, 120, 212).interpolate(Color.rgb(0, 50, 125), 0.25);
+
+        /* dark */
+//        Color color = Color.rgb(75, 192, 253).interpolate(Color.rgb(50, 50, 50), 0.1).interpolate(Color.rgb(50, 50, 50), 0.1);
+//        Color color = Color.rgb(75, 192, 253).interpolate(Color.BLACK, 0.17);
+//        Color color = Color.rgb(0, 120, 212).interpolate(Color.rgb(105, 225, 255), 0.7);
+
     }
 
     public static void main(String[] args) {
