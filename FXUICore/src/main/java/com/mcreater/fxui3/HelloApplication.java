@@ -76,6 +76,10 @@ public class HelloApplication extends Application {
         button1.setTheme(ResourceProcessor.ThemeType.DARK);
         button2.setTheme(ResourceProcessor.ThemeType.DARK);
 
+        button.setDefaultButton(true);
+        button1.setDefaultButton(true);
+        button2.setDefaultButton(true);
+
         HBox target = new HBox(button1, button2, checkBox);
         target.setAlignment(Pos.BOTTOM_LEFT);
         target.setSpacing(50);
@@ -87,7 +91,7 @@ public class HelloApplication extends Application {
         button.setFont(new Font(null, 16));
         button.setWrapText(true);
 
-        button.setTheme(ResourceProcessor.ThemeType.DARK);
+        button.setTheme(ResourceProcessor.ThemeType.LIGHT);
 
         vbox.getChildren().addAll(label, button, new ChoiceBox<>(FXCollections.observableList(Arrays.asList("a", "b", "c"))), new ComboBox<>(FXCollections.observableList(Arrays.asList("a", "b", "c"))));
 

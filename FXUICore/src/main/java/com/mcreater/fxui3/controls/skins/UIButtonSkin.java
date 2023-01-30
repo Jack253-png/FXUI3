@@ -7,7 +7,9 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;
@@ -23,7 +25,7 @@ import javafx.util.Duration;
 
 public class UIButtonSkin extends ButtonSkin {
     private final IntegerProperty backgroundGrey;
-    private final IntegerProperty textColorGrey;
+    private final DoubleProperty textColorOpacity;
     private final IntegerProperty borderButtomColorGrey;
     private final Object lock = new Object();
     private Timeline timeline;
@@ -34,8 +36,6 @@ public class UIButtonSkin extends ButtonSkin {
     private static final int borderStdColorGreyLight = 227;
     private static final int borderModColorGreyLight = 202;
     private static final Color borderStdColorLight = Color.rgb(borderStdColorGreyLight, borderStdColorGreyLight, borderStdColorGreyLight);
-    private static final int textStdColorGreyLight = 28;
-    private static final int textModColorGreyLight = 93;
     private static final int backgroundStdGreyLight = 249;
     private static final int backgroundMod1GreyLight = 246;
     private static final int backgroundMod2GreyLight = 242;
@@ -43,8 +43,6 @@ public class UIButtonSkin extends ButtonSkin {
     private static final int borderStdColorGreyDark = 53;
     private static final int borderModColorGreyDark = 48;
     private static final Color borderStdColorDark = Color.rgb(borderStdColorGreyDark, borderStdColorGreyDark, borderStdColorGreyDark);
-    private static final int textStdColorGreyDark = 253;
-    private static final int textModColorGreyDark = 206;
     private static final int backgroundStdGreyDark = 45;
     private static final int backgroundMod1GreyDark = 50;
     private static final int backgroundMod2GreyDark = 39;
@@ -62,8 +60,16 @@ public class UIButtonSkin extends ButtonSkin {
                         Insets.EMPTY
                 )
         )));
-        textColorGrey = new SimpleIntegerProperty(button.getTheme() == ResourceProcessor.ThemeType.LIGHT ? textStdColorGreyLight : textStdColorGreyDark);
-        textColorGrey.addListener((observableValue, number, t1) -> button.setTextFill(Color.rgb(t1.intValue(), t1.intValue(), t1.intValue())));
+        textColorOpacity = new SimpleDoubleProperty(1.0);
+        textColorOpacity.addListener((observableValue, number, t1) -> {
+            Color t = (Color) button.getTextFill();
+            button.setTextFill(new Color(
+                    t.getRed(),
+                    t.getGreen(),
+                    t.getBlue(),
+                    t1.doubleValue()
+            ));
+        });
         borderButtomColorGrey = new SimpleIntegerProperty(button.getTheme() == ResourceProcessor.ThemeType.LIGHT ? borderModColorGreyLight : borderModColorGreyDark);
         borderButtomColorGrey.addListener((observableValue, number, t1) -> {
             Border border = new Border(new BorderStroke(
@@ -103,8 +109,8 @@ public class UIButtonSkin extends ButtonSkin {
                                         Interpolator.EASE_BOTH
                                 ),
                                 new KeyValue(
-                                        textColorGrey,
-                                        isLight ? textStdColorGreyLight : textStdColorGreyDark,
+                                        textColorOpacity,
+                                        1,
                                         Interpolator.EASE_BOTH
                                 ),
                                 new KeyValue(
@@ -133,8 +139,8 @@ public class UIButtonSkin extends ButtonSkin {
                                         Interpolator.EASE_BOTH
                                 ),
                                 new KeyValue(
-                                        textColorGrey,
-                                        isLight ? textStdColorGreyLight : textStdColorGreyDark,
+                                        textColorOpacity,
+                                        1,
                                         Interpolator.EASE_BOTH
                                 ),
                                 new KeyValue(
@@ -163,8 +169,8 @@ public class UIButtonSkin extends ButtonSkin {
                                         Interpolator.EASE_BOTH
                                 ),
                                 new KeyValue(
-                                        textColorGrey,
-                                        isLight ? textStdColorGreyLight : textStdColorGreyDark,
+                                        textColorOpacity,
+                                        1,
                                         Interpolator.EASE_BOTH
                                 ),
                                 new KeyValue(
@@ -193,8 +199,8 @@ public class UIButtonSkin extends ButtonSkin {
                                         Interpolator.EASE_BOTH
                                 ),
                                 new KeyValue(
-                                        textColorGrey,
-                                        isLight ? textModColorGreyLight : textModColorGreyDark,
+                                        textColorOpacity,
+                                        0.7,
                                         Interpolator.EASE_BOTH
                                 ),
                                 new KeyValue(

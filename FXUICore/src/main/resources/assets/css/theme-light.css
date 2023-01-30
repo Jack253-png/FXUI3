@@ -3,6 +3,7 @@
     -fx-background-radius: 5;
     -fx-border-radius: 5;
     -fx-font-size: 14;
+    -fx-background-insets: 0 0 1 0;
 
     -fx-border-color: #e3e3e3 #e3e3e3 #cacaca #e3e3e3;
 
@@ -21,7 +22,7 @@
 }
 .ui-button:disabled {
     -fx-opacity: 1;
-    -fx-text-fill: rgb(156, 156, 156);
+    -fx-text-fill: rgba(28, 28, 28, 0.7);
 
     -fx-border-color: #e3e3e3 #e3e3e3 #cacaca #e3e3e3;
     -fx-background-color:
@@ -39,7 +40,6 @@
 .ui-button:default:hover {
     -fx-background-color: #1975c5 #1975c5 #1975c5 #1975c5;
     -fx-border-color: transparent transparent #003e72 transparent;
-
 }
 .ui-button:default:pressed {
     -fx-background-color: #3183ca #3183ca #3183ca #3183ca;
