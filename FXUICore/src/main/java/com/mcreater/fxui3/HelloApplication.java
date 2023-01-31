@@ -146,7 +146,6 @@ public class HelloApplication extends Application {
 //        Color color = Color.rgb(0, 120, 212).interpolate(Color.rgb(105, 225, 255), 0.7);
 
     }
-
     public static void main(String[] args) {
         launch();
     }

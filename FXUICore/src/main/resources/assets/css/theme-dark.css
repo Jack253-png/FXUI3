@@ -78,12 +78,12 @@
 .ui-check-box:selected:hover .box,
 .ui-check-box:indeterminate:hover .box {
     -fx-background-color: #47b1e8;
-    -fx-border-color: #49b9f2;
+    -fx-border-color: #47b1e8;
 }
 .ui-check-box:selected:pressed .box,
 .ui-check-box:indeterminate:pressed .box {
     -fx-background-color: #42a1d2;
-    -fx-border-color: #46aee4;
+    -fx-border-color: #42a1d2;
 }
 .ui-check-box .box .mark {
     -fx-background-color: transparent;
@@ -112,5 +112,5 @@
 .ui-check-box:selected:disabled .box,
 .ui-check-box:indeterminate:disabled .box {
     -fx-background-color: #42a1d2;
-    -fx-border-color: #46aee4;
+    -fx-border-color: #42a1d2;
 }
