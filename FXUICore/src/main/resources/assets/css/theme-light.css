@@ -2,8 +2,10 @@
     -fx-text-fill: rgba(28, 28, 28);
     -fx-background-radius: 5;
     -fx-border-radius: 5;
+    -ui-button-defined-border-radius: 5;
     -fx-font-size: 14;
     -fx-background-insets: 0 0 1 0;
+    -ui-button-defined-border-width: 1;
 
     -fx-border-color: #e3e3e3 #e3e3e3 #cacaca #e3e3e3;
 

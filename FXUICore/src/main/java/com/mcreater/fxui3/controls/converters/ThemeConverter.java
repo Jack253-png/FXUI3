@@ -5,6 +5,7 @@ import com.sun.javafx.css.StyleConverterImpl;
 import javafx.css.ParsedValue;
 import javafx.css.StyleConverter;
 import javafx.scene.text.Font;
+import javafx.util.converter.NumberStringConverter;
 
 import java.util.logging.Logger;
 
@@ -30,7 +31,7 @@ public class ThemeConverter extends StyleConverterImpl<String, ResourceProcessor
         }
         catch (Exception e) {
             Logger.getLogger(ThemeConverter.class.getName()).warning(String.format("invaild theme name %s", string));
-            return ResourceProcessor.ThemeType.LIGHT;
+            return null;
         }
     }
     public String toString() {

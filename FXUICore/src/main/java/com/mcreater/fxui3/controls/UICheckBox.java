@@ -4,11 +4,11 @@ import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.base.IControl;
 import com.mcreater.fxui3.controls.converters.ThemeConverter;
 import com.mcreater.fxui3.controls.skins.UICheckBoxSkin;
+import com.mcreater.fxui3.util.FXUtil;
 import javafx.css.CssMetaData;
 import javafx.css.SimpleStyleableObjectProperty;
 import javafx.css.Styleable;
 import javafx.css.StyleableObjectProperty;
-import javafx.css.StyleableProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Skin;
@@ -22,6 +22,7 @@ import static com.mcreater.fxui3.assets.ResourceProcessor.LIGHT_USERAGENT_STYLES
 
 public class UICheckBox extends CheckBox implements IControl {
     private static final String DEFAULT_STYLE_CLASS = "ui-check-box";
+    private final StyleableProperties DEFAULT_PROPERTIES = new StyleableProperties();
     public UICheckBox() {
         super();
         initialize();
@@ -37,7 +38,7 @@ public class UICheckBox extends CheckBox implements IControl {
     }
     public void requestFocus() {}
     private final StyleableObjectProperty<ResourceProcessor.ThemeType> themeProperty = new SimpleStyleableObjectProperty<>(
-            UICheckBox.StyleableProperties.THEME,
+            DEFAULT_PROPERTIES.THEME,
             UICheckBox.this,
             "theme",
             ResourceProcessor.ThemeType.LIGHT
@@ -52,24 +53,17 @@ public class UICheckBox extends CheckBox implements IControl {
     }
 
     public StyleableObjectProperty<ResourceProcessor.ThemeType> themeProperty() {
+
         return themeProperty;
     }
 
-    private static class StyleableProperties {
-        private static final CssMetaData<UICheckBox, ResourceProcessor.ThemeType> THEME =
-                new CssMetaData<UICheckBox, ResourceProcessor.ThemeType>("-ui-check-box-theme",
-                        ThemeConverter.getInstance(), ResourceProcessor.ThemeType.LIGHT) {
-                    public boolean isSettable(UICheckBox control) {
-                        return !control.themeProperty.isBound();
-                    }
-                    public StyleableProperty<ResourceProcessor.ThemeType> getStyleableProperty(UICheckBox control) {
-                        return control.themeProperty();
-                    }
-                };
+    private final class StyleableProperties {
+        private final CssMetaData<UICheckBox, ResourceProcessor.ThemeType> THEME =
+                FXUtil.createCSSMetaData(ThemeConverter.getInstance(), UICheckBox.this::themeProperty, "-ui-check-box-theme", ResourceProcessor.ThemeType.LIGHT);
 
-        private static final List<CssMetaData<? extends Styleable, ?>> CHILD_STYLEABLES;
+        private final List<CssMetaData<? extends Styleable, ?>> CHILD_STYLEABLES;
 
-        static {
+        private StyleableProperties() {
             final List<CssMetaData<? extends Styleable, ?>> styleables =
                     new ArrayList<>(Button.getClassCssMetaData());
             Collections.addAll(styleables, THEME);
@@ -77,7 +71,7 @@ public class UICheckBox extends CheckBox implements IControl {
         }
     }
     public List<CssMetaData<? extends Styleable, ?>> getControlCssMetaData() {
-        return UICheckBox.StyleableProperties.CHILD_STYLEABLES;
+        return DEFAULT_PROPERTIES.CHILD_STYLEABLES;
     }
     public String getUserAgentStylesheet() {
         return getTheme() == ResourceProcessor.ThemeType.LIGHT ? LIGHT_USERAGENT_STYLESHEET : DARK_USERAGENT_STYLESHEET;

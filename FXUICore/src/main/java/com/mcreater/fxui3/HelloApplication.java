@@ -73,10 +73,11 @@ public class HelloApplication extends Application {
 
         button1.setTheme(ResourceProcessor.ThemeType.DARK);
         button2.setTheme(ResourceProcessor.ThemeType.DARK);
+        button.setTheme(ResourceProcessor.ThemeType.DARK);
 
-        button.setDefaultButton(true);
-        button1.setDefaultButton(true);
-        button2.setDefaultButton(true);
+//        button.setDefaultButton(true);
+//        button1.setDefaultButton(true);
+//        button2.setDefaultButton(true);
 
         HBox target = new HBox(button1, button2, checkBox);
         target.setAlignment(Pos.BOTTOM_LEFT);
@@ -88,8 +89,6 @@ public class HelloApplication extends Application {
         });
         button.setFont(new Font(null, 16));
         button.setWrapText(true);
-
-        button.setTheme(ResourceProcessor.ThemeType.LIGHT);
 
         vbox.getChildren().addAll(label, button, new ChoiceBox<>(FXCollections.observableList(Arrays.asList("a", "b", "c"))), new ComboBox<>(FXCollections.observableList(Arrays.asList("a", "b", "c"))));
 
@@ -139,11 +138,14 @@ public class HelloApplication extends Application {
 //        Color color = Color.rgb(0, 102, 190).interpolate(Color.rgb(253, 253, 253), 0.1).interpolate(Color.rgb(253, 253, 253), 0.1);
 //        Color color = Color.rgb(0, 102, 190).interpolate(Color.BLACK, 0.4);
 //        Color color = Color.rgb(0, 120, 212).interpolate(Color.rgb(0, 50, 125), 0.25);
+//        base = base.interpolate(Color.rgb(0, 0, 0), 0.11);
 
         /* dark */
 //        Color color = Color.rgb(75, 192, 253).interpolate(Color.rgb(50, 50, 50), 0.1).interpolate(Color.rgb(50, 50, 50), 0.1);
 //        Color color = Color.rgb(75, 192, 253).interpolate(Color.BLACK, 0.17);
 //        Color color = Color.rgb(0, 120, 212).interpolate(Color.rgb(105, 225, 255), 0.7);
+//        base = base.interpolate(Color.rgb(80, 205, 255), 0.9);
+
 
     }
     public static void main(String[] args) {
