@@ -22,7 +22,6 @@ import static com.mcreater.fxui3.assets.ResourceProcessor.LIGHT_USERAGENT_STYLES
 
 public class UICheckBox extends CheckBox implements IControl {
     private static final String DEFAULT_STYLE_CLASS = "ui-check-box";
-    private final StyleableProperties DEFAULT_PROPERTIES = new StyleableProperties();
     public UICheckBox() {
         super();
         initialize();
@@ -38,7 +37,7 @@ public class UICheckBox extends CheckBox implements IControl {
     }
     public void requestFocus() {}
     private final StyleableObjectProperty<ResourceProcessor.ThemeType> themeProperty = new SimpleStyleableObjectProperty<>(
-            DEFAULT_PROPERTIES.THEME,
+            StyleableProperties.THEME,
             UICheckBox.this,
             "theme",
             ResourceProcessor.ThemeType.LIGHT
@@ -57,13 +56,13 @@ public class UICheckBox extends CheckBox implements IControl {
         return themeProperty;
     }
 
-    private final class StyleableProperties {
-        private final CssMetaData<UICheckBox, ResourceProcessor.ThemeType> THEME =
-                FXUtil.createCSSMetaData(ThemeConverter.getInstance(), UICheckBox.this::themeProperty, "-ui-check-box-theme", ResourceProcessor.ThemeType.LIGHT);
+    private static final class StyleableProperties {
+        private static final CssMetaData<UICheckBox, ResourceProcessor.ThemeType> THEME =
+                new FXUtil.CssMetaDataImpl<>("-ui-check-box-theme", ThemeConverter.getInstance(), ResourceProcessor.ThemeType.LIGHT, UICheckBox::themeProperty);
 
-        private final List<CssMetaData<? extends Styleable, ?>> CHILD_STYLEABLES;
+        private static final List<CssMetaData<? extends Styleable, ?>> CHILD_STYLEABLES;
 
-        private StyleableProperties() {
+        static {
             final List<CssMetaData<? extends Styleable, ?>> styleables =
                     new ArrayList<>(Button.getClassCssMetaData());
             Collections.addAll(styleables, THEME);
@@ -71,7 +70,7 @@ public class UICheckBox extends CheckBox implements IControl {
         }
     }
     public List<CssMetaData<? extends Styleable, ?>> getControlCssMetaData() {
-        return DEFAULT_PROPERTIES.CHILD_STYLEABLES;
+        return StyleableProperties.CHILD_STYLEABLES;
     }
     public String getUserAgentStylesheet() {
         return getTheme() == ResourceProcessor.ThemeType.LIGHT ? LIGHT_USERAGENT_STYLESHEET : DARK_USERAGENT_STYLESHEET;

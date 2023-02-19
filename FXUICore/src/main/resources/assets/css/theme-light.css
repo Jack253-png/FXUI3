@@ -6,6 +6,11 @@
     -fx-font-size: 14;
     -fx-background-insets: 0 0 1 0;
     -ui-button-defined-border-width: 1;
+    -ui-button-target-text-color: rgba(28, 28, 28, 0.7);
+    -ui-button-std-text-color: rgb(28, 28, 28);
+    -ui-button-target-border-color: rgb(202, 202, 202);
+    -ui-button-std-border-color: rgb(227, 227, 227);
+    -ui-button-std-background-color: rgb(249, 249, 249);
 
     -fx-border-color: #e3e3e3 #e3e3e3 #cacaca #e3e3e3;
 

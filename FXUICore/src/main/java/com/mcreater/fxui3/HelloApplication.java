@@ -145,8 +145,9 @@ public class HelloApplication extends Application {
 //        Color color = Color.rgb(75, 192, 253).interpolate(Color.BLACK, 0.17);
 //        Color color = Color.rgb(0, 120, 212).interpolate(Color.rgb(105, 225, 255), 0.7);
 //        base = base.interpolate(Color.rgb(80, 205, 255), 0.9);
-
-
+    }
+    public String createString() {
+        return "too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_";
     }
     public static void main(String[] args) {
         launch();
