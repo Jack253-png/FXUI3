@@ -101,7 +101,7 @@ public class InAppAeroGlassBrush implements IBrush {
 
             WritableImage result2 = null;
             if (offset == null) result2 = parent.snapshot(null, null);
-            parent.setEffect(new GaussianBlur(64));
+            parent.setEffect(new GaussianBlur(128));
             WritableImage result = parent.snapshot(null, null);
             opacityMap.forEach(Node::setOpacity);
             parent.setEffect(null);

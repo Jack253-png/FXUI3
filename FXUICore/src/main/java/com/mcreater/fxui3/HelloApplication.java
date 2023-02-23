@@ -69,11 +69,11 @@ public class HelloApplication extends Application {
         UIButton button1 = new UIButton("test");
         UIButton button2 = new UIButton("test");
         UICheckBox checkBox = new UICheckBox("test");
-        checkBox.setTheme(ResourceProcessor.ThemeType.DARK);
+        checkBox.setTheme(ResourceProcessor.ThemeType.LIGHT);
 
-        button1.setTheme(ResourceProcessor.ThemeType.DARK);
-        button2.setTheme(ResourceProcessor.ThemeType.DARK);
-        button.setTheme(ResourceProcessor.ThemeType.DARK);
+        button1.setTheme(ResourceProcessor.ThemeType.LIGHT);
+        button2.setTheme(ResourceProcessor.ThemeType.LIGHT);
+        button.setTheme(ResourceProcessor.ThemeType.LIGHT);
 
 //        button.setDefaultButton(true);
 //        button1.setDefaultButton(true);
@@ -92,11 +92,10 @@ public class HelloApplication extends Application {
 
         vbox.getChildren().addAll(label, button, new ChoiceBox<>(FXCollections.observableList(Arrays.asList("a", "b", "c"))), new ComboBox<>(FXCollections.observableList(Arrays.asList("a", "b", "c"))));
 
-        Pane p = new Pane();
-        p.getChildren().addAll(new HBox(rectangleRed, rectangleBlue), target, vbox);
+        Pane p = new Pane(new HBox(rectangleRed, rectangleBlue), target, vbox);
         p.setBackground(new Background(
                 new BackgroundFill(
-                        Color.rgb(50, 50, 50),
+                        Color.rgb(253, 253, 253),
                         CornerRadii.EMPTY,
                         Insets.EMPTY
                 )
@@ -129,25 +128,34 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(p, 320, 240);
         target.prefWidthProperty().bind(scene.widthProperty());
         target.prefHeightProperty().bind(scene.heightProperty());
-        scene.setFill(Color.rgb(50, 50, 50));
+        scene.setFill(Color.rgb(253, 253, 253));
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
 
-        /* light */
-//        Color color = Color.rgb(0, 102, 190).interpolate(Color.rgb(253, 253, 253), 0.1).interpolate(Color.rgb(253, 253, 253), 0.1);
-//        Color color = Color.rgb(0, 102, 190).interpolate(Color.BLACK, 0.4);
-//        Color color = Color.rgb(0, 120, 212).interpolate(Color.rgb(0, 50, 125), 0.25);
-//        base = base.interpolate(Color.rgb(0, 0, 0), 0.11);
+        /* System color to control color */
+        /* -- light */
+        // base = base.interpolate(Color.rgb(0, 0, 0), 0.11);
+        /* -- dark */
+        // base = base.interpolate(Color.rgb(80, 205, 255), 0.9);
 
-        /* dark */
-//        Color color = Color.rgb(75, 192, 253).interpolate(Color.rgb(50, 50, 50), 0.1).interpolate(Color.rgb(50, 50, 50), 0.1);
-//        Color color = Color.rgb(75, 192, 253).interpolate(Color.BLACK, 0.17);
-//        Color color = Color.rgb(0, 120, 212).interpolate(Color.rgb(105, 225, 255), 0.7);
-//        base = base.interpolate(Color.rgb(80, 205, 255), 0.9);
-    }
-    public String createString() {
-        return "too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_too_long_";
+        /* Base color to hover color / pressed color */
+        /* -- light */
+        // Color color = Color.rgb(0, 102, 190).interpolate(Color.rgb(253, 253, 253), 0.1).interpolate(Color.rgb(253, 253, 253), 0.1);
+        /* -- dark */
+        // Color color = Color.rgb(75, 192, 253).interpolate(Color.rgb(50, 50, 50), 0.1).interpolate(Color.rgb(50, 50, 50), 0.1);
+
+        /* Base color to bottom border color */
+        /* -- light */
+        // Color color = Color.rgb(0, 102, 190).interpolate(Color.BLACK, 0.4);
+        /* -- dark */
+        // Color color = color;
+
+        /* Base color to standard border color*/
+        /* -- light */
+        // Color color = Color.rgb(0, 102, 190).interpolate(Color.rgb(253, 253, 253), 0.08);
+        /* -- dark */
+        // Color color = Color.rgb(75, 192, 253).interpolate(Color.BLACK, 0.17);
     }
     public static void main(String[] args) {
         launch();

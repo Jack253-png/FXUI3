@@ -1,57 +1,39 @@
 .ui-button {
-    -fx-text-fill: rgba(28, 28, 28);
     -fx-background-radius: 5;
     -fx-border-radius: 5;
-    -ui-button-defined-border-radius: 5;
     -fx-font-size: 14;
     -fx-background-insets: 0 0 1 0;
+
+    -ui-button-defined-border-radius: 5;
     -ui-button-defined-border-width: 1;
     -ui-button-target-text-color: rgba(28, 28, 28, 0.7);
     -ui-button-std-text-color: rgb(28, 28, 28);
-    -ui-button-target-border-color: rgb(202, 202, 202);
-    -ui-button-std-border-color: rgb(227, 227, 227);
-    -ui-button-std-background-color: rgb(249, 249, 249);
-
-    -fx-border-color: #e3e3e3 #e3e3e3 #cacaca #e3e3e3;
-
-    -fx-background-color:
-            rgba(249, 249, 249),
-            rgba(249, 249, 249),
-            rgba(249, 249, 249),
-            rgba(249, 249, 249);
-}
-.ui-button:focused {
-    -fx-background-color:
-            rgba(249, 249, 249),
-            rgba(249, 249, 249),
-            rgba(249, 249, 249),
-            rgba(249, 249, 249);
+    -ui-button-target-border-color: rgb(202, 202, 202, 0.7);
+    -ui-button-std-border-color: rgb(227, 227, 227, 0.7);
+    -ui-button-std-background-color: rgb(249, 249, 249, 0.7);
+    -ui-button-enter-background-color: rgb(246, 246, 246);
+    -ui-button-pressed-background-color: rgb(242, 242, 242);
 }
 .ui-button:disabled {
     -fx-opacity: 1;
     -fx-text-fill: rgba(28, 28, 28, 0.7);
 
-    -fx-border-color: #e3e3e3 #e3e3e3 #cacaca #e3e3e3;
+    -fx-border-color: #e3e3e3b2 #e3e3e3b2 #cacacab2 #e3e3e3b2;
     -fx-background-color:
-            rgba(249, 249, 249),
-            rgba(249, 249, 249),
-            rgba(249, 249, 249),
-            rgba(249, 249, 249);
+            rgba(249, 249, 249, 0.7),
+            rgba(249, 249, 249, 0.7),
+            rgba(249, 249, 249, 0.7),
+            rgba(249, 249, 249, 0.7);
 
 }
 .ui-button:default {
-    -fx-text-fill: rgba(253, 253, 253);
-    -fx-background-color: #0066be #0066be #0066be #0066be;
-    -fx-border-color: transparent transparent #003e72 transparent;
-}
-.ui-button:default:hover {
-    -fx-background-color: #1975c5 #1975c5 #1975c5 #1975c5;
-    -fx-border-color: transparent transparent #003e72 transparent;
-}
-.ui-button:default:pressed {
-    -fx-text-fill: rgba(253, 253, 253, 0.7);
-    -fx-background-color: #3183ca #3183ca #3183ca #3183ca;
-    -fx-border-color: transparent transparent transparent transparent;
+    -ui-button-target-text-color: rgba(253, 253, 253, 0.7);
+    -ui-button-std-text-color: rgb(253, 253, 253);
+    -ui-button-target-border-color: #003e72;
+    -ui-button-std-border-color: #1472c3;
+    -ui-button-std-background-color: #0066be;
+    -ui-button-enter-background-color: #1975c5;
+    -ui-button-pressed-background-color: #3183ca;
 }
 .ui-check-box {
     -fx-text-fill: rgb(70, 70, 70);

@@ -91,6 +91,18 @@ public class UIButton extends Button implements IControl {
             "std_background_color",
             Color.BLACK
     );
+    private final StyleableObjectProperty<Color> enterBackgroundColorProperty = new SimpleStyleableObjectProperty<>(
+            StyleableProperties.ENTER_BACKGROUND_COLOR,
+            UIButton.this,
+            "enter_background_color",
+            Color.BLACK
+    );
+    private final StyleableObjectProperty<Color> pressedBackgroundColorProperty = new SimpleStyleableObjectProperty<>(
+            StyleableProperties.PRESSED_BACKGROUND_COLOR,
+            UIButton.this,
+            "pressed_background_color",
+            Color.BLACK
+    );
 
     public void setTheme(ResourceProcessor.ThemeType type) {
         themeProperty().set(type);
@@ -155,6 +167,18 @@ public class UIButton extends Button implements IControl {
     public Color getStdBackgroundColor() {
         return stdBackgroundColorProperty().get();
     }
+    private StyleableObjectProperty<Color> enterBackgroundColorProperty() {
+        return enterBackgroundColorProperty;
+    }
+    public Color getEnterBackgroundColor() {
+        return enterBackgroundColorProperty().get();
+    }
+    private StyleableObjectProperty<Color> pressedBackgroundColorProperty() {
+        return pressedBackgroundColorProperty;
+    }
+    public Color getPressedBackgroundColor() {
+        return pressedBackgroundColorProperty().get();
+    }
 
     private static final class StyleableProperties {
         private static final CssMetaData<UIButton, ResourceProcessor.ThemeType> THEME =
@@ -175,13 +199,17 @@ public class UIButton extends Button implements IControl {
                 new FXUtil.CssMetaDataImpl<>("-ui-button-std-border-color", StyleConverter.getColorConverter(), Color.BLACK, UIButton::stdBorderColorProperty);
         private static final CssMetaData<UIButton, Color> STD_BACKGROUND_COLOR =
                 new FXUtil.CssMetaDataImpl<>("-ui-button-std-background-color", StyleConverter.getColorConverter(), Color.BLACK, UIButton::stdBackgroundColorProperty);
+        private static final CssMetaData<UIButton, Color> ENTER_BACKGROUND_COLOR =
+                new FXUtil.CssMetaDataImpl<>("-ui-button-enter-background-color", StyleConverter.getColorConverter(), Color.BLACK, UIButton::enterBackgroundColorProperty);
+        private static final CssMetaData<UIButton, Color> PRESSED_BACKGROUND_COLOR =
+                new FXUtil.CssMetaDataImpl<>("-ui-button-pressed-background-color", StyleConverter.getColorConverter(), Color.BLACK, UIButton::pressedBackgroundColorProperty);
 
         private static final List<CssMetaData<? extends Styleable, ?>> CHILD_STYLEABLES;
 
         static {
             final List<CssMetaData<? extends Styleable, ?>> styleables =
                     new ArrayList<>(Button.getClassCssMetaData());
-            Collections.addAll(styleables, THEME, ANIMATION_SPEED, DEFINED_BORDER_RADIUS, DEFINED_BORDER_WIDTH, TARGET_TEXT_COLOR, STD_TEXT_COLOR, TARGET_BORDER_COLOR, STD_BORDER_COLOR, STD_BACKGROUND_COLOR);
+            Collections.addAll(styleables, THEME, ANIMATION_SPEED, DEFINED_BORDER_RADIUS, DEFINED_BORDER_WIDTH, TARGET_TEXT_COLOR, STD_TEXT_COLOR, TARGET_BORDER_COLOR, STD_BORDER_COLOR, STD_BACKGROUND_COLOR, ENTER_BACKGROUND_COLOR, PRESSED_BACKGROUND_COLOR);
             CHILD_STYLEABLES = Collections.unmodifiableList(styleables);
         }
     }

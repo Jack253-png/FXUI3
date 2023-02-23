@@ -1,6 +1,5 @@
 package com.mcreater.fxui3.controls.skins;
 
-import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.UIButton;
 import com.sun.javafx.scene.control.skin.ButtonSkin;
 import javafx.animation.Interpolator;
@@ -27,18 +26,13 @@ public class UIButtonSkin extends ButtonSkin {
     private final ObjectProperty<Color> borderButtomColorProperty;
     private final Object lock = new Object();
     private Timeline timeline;
-    private static final int backgroundMod1GreyLight = 246;
-    private static final int backgroundMod2GreyLight = 242;
-
-    private static final int backgroundMod1GreyDark = 50;
-    private static final int backgroundMod2GreyDark = 39;
 
     public UIButtonSkin(UIButton button) {
         super(button);
         button.themeProperty().addListener((observableValue, type, t1) -> genThemeChangeAnimation(button));
         button.defaultButtonProperty().addListener((observableValue, aBoolean, t1) -> genThemeChangeAnimation(button));
 
-        backgroundColorProperty = new SimpleObjectProperty<>(button.getStdBackgroundColor());
+        backgroundColorProperty = new SimpleObjectProperty<>();
         backgroundColorProperty.addListener((observableValue, number, t1) -> button.setBackground(new Background(
                 new BackgroundFill(
                         t1,
@@ -46,10 +40,13 @@ public class UIButtonSkin extends ButtonSkin {
                         Insets.EMPTY
                 )
         )));
-        textColorProperty = new SimpleObjectProperty<>(button.getStdTextColor());
-        textColorProperty.addListener((observableValue, number, t1) -> button.setTextFill(t1));
+        backgroundColorProperty.set(button.getStdBackgroundColor());
 
-        borderButtomColorProperty = new SimpleObjectProperty<>(button.getTargetBorderColor());
+        textColorProperty = new SimpleObjectProperty<>();
+        textColorProperty.addListener((observableValue, number, t1) -> button.setTextFill(t1));
+        textColorProperty.set(button.getStdTextColor());
+
+        borderButtomColorProperty = new SimpleObjectProperty<>();
         borderButtomColorProperty.addListener((observableValue, number, t1) -> {
             Border border = new Border(new BorderStroke(
                     button.getStdBorderColor(),
@@ -61,12 +58,13 @@ public class UIButtonSkin extends ButtonSkin {
                     BorderStrokeStyle.SOLID,
                     BorderStrokeStyle.SOLID,
                     new CornerRadii(button.getDefinedBorderRadius()),
-                    new BorderWidths(button.getDefinedBorderWidth()),
+                    new BorderWidths(0, 0, button.getDefinedBorderWidth(), 0),
                     Insets.EMPTY
             ));
 
             button.setBorder(border);
         });
+        borderButtomColorProperty.set(button.getTargetBorderColor());
 
         button.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> genMouseEnterAnimation(button));
         button.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> genMouseExitAnimation(button));
@@ -74,7 +72,7 @@ public class UIButtonSkin extends ButtonSkin {
         button.addEventHandler(MouseEvent.MOUSE_RELEASED, mouseEvent -> genMouseEnterAnimation(button));
     }
     private boolean checkState(UIButton button) {
-        return !button.isDefaultButton() && !button.isDisabled();
+        return !button.isDisabled();
     }
     private void genThemeChangeAnimation(UIButton button) {
         if (checkState(button)) {
@@ -109,14 +107,13 @@ public class UIButtonSkin extends ButtonSkin {
         if (checkState(button)) {
             synchronized (lock) {
                 if (timeline != null) timeline.stop();
-                boolean isLight = button.getTheme() == ResourceProcessor.ThemeType.LIGHT;
 
                 timeline = new Timeline(
                         new KeyFrame(
                                 Duration.millis(button.getAnimationSpeed()),
                                 new KeyValue(
                                         backgroundColorProperty,
-                                        Color.grayRgb(isLight ? backgroundMod1GreyLight : backgroundMod1GreyDark),
+                                        button.getEnterBackgroundColor(),
                                         Interpolator.EASE_BOTH
                                 ),
                                 new KeyValue(
@@ -168,14 +165,13 @@ public class UIButtonSkin extends ButtonSkin {
         if (checkState(button)) {
             synchronized (lock) {
                 if (timeline != null) timeline.stop();
-                boolean isLight = button.getTheme() == ResourceProcessor.ThemeType.LIGHT;
 
                 timeline = new Timeline(
                         new KeyFrame(
                                 Duration.millis(button.getAnimationSpeed()),
                                 new KeyValue(
                                         backgroundColorProperty,
-                                        Color.grayRgb(isLight ? backgroundMod2GreyLight : backgroundMod2GreyDark),
+                                        button.getPressedBackgroundColor(),
                                         Interpolator.EASE_BOTH
                                 ),
                                 new KeyValue(
