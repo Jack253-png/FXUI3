@@ -2,13 +2,16 @@ package com.mcreater.fxui3.controls;
 
 import com.mcreater.fxui3.assets.ResourceProcessor;
 import com.mcreater.fxui3.controls.base.IControl;
+import com.mcreater.fxui3.controls.converters.NumberConverter;
 import com.mcreater.fxui3.controls.converters.ThemeConverter;
 import com.mcreater.fxui3.controls.skins.UICheckBoxSkin;
 import com.mcreater.fxui3.util.FXUtil;
 import javafx.css.CssMetaData;
+import javafx.css.SimpleStyleableIntegerProperty;
 import javafx.css.SimpleStyleableObjectProperty;
 import javafx.css.StyleConverter;
 import javafx.css.Styleable;
+import javafx.css.StyleableIntegerProperty;
 import javafx.css.StyleableObjectProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -44,6 +47,10 @@ public class UICheckBox extends CheckBox implements IControl {
             "theme",
             ResourceProcessor.ThemeType.LIGHT
     );
+    private final StyleableIntegerProperty animationSpeedProperty = new SimpleStyleableIntegerProperty(
+            StyleableProperties.ANIMATION_SPEED,
+            40
+    );
     private final StyleableObjectProperty<Color> colorizationColorProperty = new SimpleStyleableObjectProperty<>(
             StyleableProperties.COLORIZATION_COLOR,
             UICheckBox.this,
@@ -66,6 +73,19 @@ public class UICheckBox extends CheckBox implements IControl {
     public StyleableObjectProperty<Color> colorizationColorProperty() {
         return colorizationColorProperty;
     }
+
+    public void setAnimationSpeed(int speed) {
+        animationSpeedProperty().set(speed);
+    }
+
+    public int getAnimationSpeed() {
+        return animationSpeedProperty().get();
+    }
+
+    public StyleableIntegerProperty animationSpeedProperty() {
+        return animationSpeedProperty;
+    }
+
     public Color getColorizationColor() {
         return colorizationColorProperty().get();
     }
@@ -73,9 +93,12 @@ public class UICheckBox extends CheckBox implements IControl {
         colorizationColorProperty().set(color);
     }
 
+
     private static final class StyleableProperties {
         private static final CssMetaData<UICheckBox, ResourceProcessor.ThemeType> THEME =
                 new FXUtil.CssMetaDataImpl<>("-ui-check-box-theme", ThemeConverter.getInstance(), ResourceProcessor.ThemeType.LIGHT, UICheckBox::themeProperty);
+        private static final CssMetaData<UICheckBox, Number> ANIMATION_SPEED =
+                new FXUtil.CssMetaDataImpl<>("-ui-check-box-animation-speed", NumberConverter.getInstance(), 40, UICheckBox::animationSpeedProperty);
         private static final CssMetaData<UICheckBox, Color> COLORIZATION_COLOR =
                 new FXUtil.CssMetaDataImpl<>("-ui-check-box-colorization-color", StyleConverter.getColorConverter(), null, UICheckBox::colorizationColorProperty);
 

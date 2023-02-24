@@ -77,7 +77,9 @@ public class HelloApplication extends Application {
         button2.setTheme(ResourceProcessor.ThemeType.DARK);
         button.setTheme(ResourceProcessor.ThemeType.DARK);
 
-//        button.setDefaultButton(true);
+        button.setDisable(true);
+
+        button.setDefaultButton(true);
 //        button1.setDefaultButton(true);
 //        button2.setDefaultButton(true);
 

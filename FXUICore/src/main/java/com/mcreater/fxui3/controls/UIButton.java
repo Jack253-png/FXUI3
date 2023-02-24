@@ -6,8 +6,6 @@ import com.mcreater.fxui3.controls.converters.NumberConverter;
 import com.mcreater.fxui3.controls.converters.ThemeConverter;
 import com.mcreater.fxui3.controls.skins.UIButtonSkin;
 import com.mcreater.fxui3.util.FXUtil;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.css.CssMetaData;
 import javafx.css.SimpleStyleableIntegerProperty;
 import javafx.css.SimpleStyleableObjectProperty;

@@ -18,27 +18,26 @@
 }
 .ui-button:disabled {
     -fx-opacity: 1;
-    -fx-text-fill: rgb(253, 253, 253, 0.7);
-
-    -fx-border-color: #353535e5 #353535e5 #353535e5 #353535e5;
-    -fx-background-color:
-            rgba(45, 45, 45, 0.9),
-            rgba(45, 45, 45, 0.9),
-            rgba(45, 45, 45, 0.9),
-            rgba(45, 45, 45, 0.9);
-
+    -ui-button-target-text-color: rgba(253, 253, 253, 0.7);
+    -ui-button-std-text-color: rgb(253, 253, 253, 0.7);
+    -ui-button-target-border-color: rgb(53, 53, 53, 0.9);
+    -ui-button-std-border-color: rgb(53, 53, 53, 0.9);
+    -ui-button-std-background-color: rgb(39, 39, 39);
+    -ui-button-enter-background-color: rgb(39, 39, 39);
+    -ui-button-pressed-background-color: rgb(39, 39, 39);
 }
 .ui-button:default {
     -ui-button-colorization-color: #0077d2;
     -ui-button-target-text-color: rgba(28, 28, 28, 0.7);
     -ui-button-std-text-color: rgb(28, 28, 28);
-    /*-ui-button-target-border-color: #40a0d1;*/
-    /*-ui-button-std-border-color: #4bc0fd;*/
-    /*-ui-button-std-background-color: #4bc0fd;*/
-    /*-ui-button-enter-background-color: #47b1e8;*/
-    /*-ui-button-pressed-background-color: #42a1d2;*/
+}
+.ui-button:default {
+    -ui-button-colorization-color: #0077d2;
+    -ui-button-target-text-color: rgba(28, 28, 28, 0.7);
+    -ui-button-std-text-color: rgb(28, 28, 28, 0.7);
 }
 .ui-check-box {
+    -ui-button-animation-speed: 40;
     -fx-text-fill: rgb(221, 221, 221);
     -fx-font-size: 14;
 }

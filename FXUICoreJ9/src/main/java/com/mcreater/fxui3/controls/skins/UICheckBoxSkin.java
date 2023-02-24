@@ -12,10 +12,8 @@ import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 public class UICheckBoxSkin extends CheckBoxSkin {
-    private final Line checkLeft;
-    private final Line checkRight;
     private final Line checkIndeterminate;
-    private Timeline checkInAnimation;
+    private final Timeline checkInAnimation;
     private static final Point2D checkLeftStartPoint = new Point2D(6, 11);
     private static final int checkLeftAdd = 3;
     private static final Point2D checkRightStartPoint = new Point2D(9, 14);
@@ -27,10 +25,10 @@ public class UICheckBoxSkin extends CheckBoxSkin {
 
         Interpolator interpolator = Interpolator.LINEAR;
 
-        checkLeft = new Line(checkLeftStartPoint.getX(), checkLeftStartPoint.getY(), checkLeftStartPoint.getX() + checkLeftAdd, checkLeftStartPoint.getY() + checkLeftAdd);
+        Line checkLeft = new Line(checkLeftStartPoint.getX(), checkLeftStartPoint.getY(), checkLeftStartPoint.getX() + checkLeftAdd, checkLeftStartPoint.getY() + checkLeftAdd);
         checkLeft.setStrokeWidth(1.5);
         checkLeft.getStyleClass().add("check-line");
-        checkRight = new Line(checkRightStartPoint.getX(), checkRightStartPoint.getY(), checkRightStartPoint.getX() + checkRightXAdd, checkRightStartPoint.getY() + checkRightYAdd);
+        Line checkRight = new Line(checkRightStartPoint.getX(), checkRightStartPoint.getY(), checkRightStartPoint.getX() + checkRightXAdd, checkRightStartPoint.getY() + checkRightYAdd);
         checkRight.setStrokeWidth(1.5);
         checkRight.getStyleClass().add("check-line");
         checkIndeterminate = new Line(7, 11, 14, 11);

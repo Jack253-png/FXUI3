@@ -33,6 +33,7 @@ public class UIButtonSkin extends ButtonSkin {
         button.themeProperty().addListener((observableValue, type, t1) -> genThemeChangeAnimation(button));
         button.defaultButtonProperty().addListener((observableValue, aBoolean, t1) -> genThemeChangeAnimation(button));
         button.colorizationColorProperty().addListener((observableValue, color, t1) -> updateColor(button, t1));
+        button.disabledProperty().addListener((observableValue, aBoolean, t1) -> updateColor(button, button.getColorizationColor()));
         updateColor(button, button.getColorizationColor());
 
         backgroundColorProperty = new SimpleObjectProperty<>();
@@ -76,131 +77,130 @@ public class UIButtonSkin extends ButtonSkin {
     }
     private void updateColor(UIButton button, Color color) {
         if (color != null && button.isDefaultButton()) {
-            Color base = FXUtil.ColorizationProcessor.styleColorToBaseColor(color, button.getTheme());
-            button.stdBackgroundColorProperty().set(base);
-            button.enterBackgroundColorProperty().set(FXUtil.ColorizationProcessor.baseColorToL1Color(base, button.getTheme()));
-            button.pressedBackgroundColorProperty().set(FXUtil.ColorizationProcessor.baseColorToL2Color(base, button.getTheme()));
-            button.stdBorderColorProperty().set(FXUtil.ColorizationProcessor.baseColorToStdBorderColor(base, button.getTheme()));
-            button.targetBorderColorProperty().set(FXUtil.ColorizationProcessor.baseColorToBottomBorderColor(base, button.getTheme()));
+            if (!button.isDisabled()) {
+                Color base = FXUtil.ColorizationProcessor.styleColorToBaseColor(color, button.getTheme());
+                button.stdBackgroundColorProperty().set(base);
+                button.enterBackgroundColorProperty().set(FXUtil.ColorizationProcessor.baseColorToL1Color(base, button.getTheme()));
+                button.pressedBackgroundColorProperty().set(FXUtil.ColorizationProcessor.baseColorToL2Color(base, button.getTheme()));
+                button.stdBorderColorProperty().set(FXUtil.ColorizationProcessor.baseColorToStdBorderColor(base, button.getTheme()));
+                button.targetBorderColorProperty().set(FXUtil.ColorizationProcessor.baseColorToBottomBorderColor(base, button.getTheme()));
+            }
+            else {
+                Color base = FXUtil.ColorizationProcessor.styleColorToBaseColor(color, button.getTheme());
+                button.stdBackgroundColorProperty().set(FXUtil.ColorizationProcessor.baseColorToL2Color(base, button.getTheme()));
+                button.enterBackgroundColorProperty().set(FXUtil.ColorizationProcessor.baseColorToL2Color(base, button.getTheme()));
+                button.pressedBackgroundColorProperty().set(FXUtil.ColorizationProcessor.baseColorToL2Color(base, button.getTheme()));
+                button.stdBorderColorProperty().set(FXUtil.ColorizationProcessor.baseColorToStdBorderColor(base, button.getTheme()));
+                button.targetBorderColorProperty().set(FXUtil.ColorizationProcessor.baseColorToStdBorderColor(base, button.getTheme()));
+            }
         }
     }
-    private boolean checkState(UIButton button) {
-        return !button.isDisabled();
-    }
     private void genThemeChangeAnimation(UIButton button) {
-        if (checkState(button)) {
-            synchronized (lock) {
-                if (timeline != null) timeline.stop();
+        synchronized (lock) {
+            if (timeline != null) timeline.stop();
 
-                timeline = new Timeline(
-                        new KeyFrame(
-                                Duration.millis(button.getAnimationSpeed()),
-                                new KeyValue(
-                                        backgroundColorProperty,
-                                        button.getStdBackgroundColor(),
-                                        Interpolator.EASE_BOTH
-                                ),
-                                new KeyValue(
-                                        textColorProperty,
-                                        button.getStdTextColor(),
-                                        Interpolator.EASE_BOTH
-                                ),
-                                new KeyValue(
-                                        borderButtomColorProperty,
-                                        button.getTargetBorderColor(),
-                                        Interpolator.EASE_BOTH
-                                )
-                        )
-                );
-                timeline.playFromStart();
-            }
+            timeline = new Timeline(
+                    new KeyFrame(
+                            Duration.millis(button.getAnimationSpeed()),
+                            new KeyValue(
+                                    backgroundColorProperty,
+                                    button.getStdBackgroundColor(),
+                                    Interpolator.EASE_BOTH
+                            ),
+                            new KeyValue(
+                                    textColorProperty,
+                                    button.getStdTextColor(),
+                                    Interpolator.EASE_BOTH
+                            ),
+                            new KeyValue(
+                                    borderButtomColorProperty,
+                                    button.getTargetBorderColor(),
+                                    Interpolator.EASE_BOTH
+                            )
+                    )
+            );
+            timeline.playFromStart();
         }
     }
     private void genMouseEnterAnimation(UIButton button) {
-        if (checkState(button)) {
-            synchronized (lock) {
-                if (timeline != null) timeline.stop();
+        synchronized (lock) {
+            if (timeline != null) timeline.stop();
 
-                timeline = new Timeline(
-                        new KeyFrame(
-                                Duration.millis(button.getAnimationSpeed()),
-                                new KeyValue(
-                                        backgroundColorProperty,
-                                        button.getEnterBackgroundColor(),
-                                        Interpolator.EASE_BOTH
-                                ),
-                                new KeyValue(
-                                        textColorProperty,
-                                        button.getStdTextColor(),
-                                        Interpolator.EASE_BOTH
-                                ),
-                                new KeyValue(
-                                        borderButtomColorProperty,
-                                        button.getTargetBorderColor(),
-                                        Interpolator.EASE_BOTH
-                                )
-                        )
-                );
-                timeline.playFromStart();
-            }
+            timeline = new Timeline(
+                    new KeyFrame(
+                            Duration.millis(button.getAnimationSpeed()),
+                            new KeyValue(
+                                    backgroundColorProperty,
+                                    button.getEnterBackgroundColor(),
+                                    Interpolator.EASE_BOTH
+                            ),
+                            new KeyValue(
+                                    textColorProperty,
+                                    button.getStdTextColor(),
+                                    Interpolator.EASE_BOTH
+                            ),
+                            new KeyValue(
+                                    borderButtomColorProperty,
+                                    button.getTargetBorderColor(),
+                                    Interpolator.EASE_BOTH
+                            )
+                    )
+            );
+            timeline.playFromStart();
         }
     }
     private void genMouseExitAnimation(UIButton button) {
-        if (checkState(button)) {
-            synchronized (lock) {
-                if (timeline != null) timeline.stop();
+        synchronized (lock) {
+            if (timeline != null) timeline.stop();
 
-                timeline = new Timeline(
-                        new KeyFrame(
-                                Duration.millis(button.getAnimationSpeed()),
-                                new KeyValue(
-                                        backgroundColorProperty,
-                                        button.getStdBackgroundColor(),
-                                        Interpolator.EASE_BOTH
-                                ),
-                                new KeyValue(
-                                        textColorProperty,
-                                        button.getStdTextColor(),
-                                        Interpolator.EASE_BOTH
-                                ),
-                                new KeyValue(
-                                        borderButtomColorProperty,
-                                        button.getTargetBorderColor(),
-                                        Interpolator.EASE_BOTH
-                                )
-                        )
-                );
-                timeline.playFromStart();
-            }
+            timeline = new Timeline(
+                    new KeyFrame(
+                            Duration.millis(button.getAnimationSpeed()),
+                            new KeyValue(
+                                    backgroundColorProperty,
+                                    button.getStdBackgroundColor(),
+                                    Interpolator.EASE_BOTH
+                            ),
+                            new KeyValue(
+                                    textColorProperty,
+                                    button.getStdTextColor(),
+                                    Interpolator.EASE_BOTH
+                            ),
+                            new KeyValue(
+                                    borderButtomColorProperty,
+                                    button.getTargetBorderColor(),
+                                    Interpolator.EASE_BOTH
+                            )
+                    )
+            );
+            timeline.playFromStart();
         }
     }
     private void genMousePressedAnimation(UIButton button) {
-        if (checkState(button)) {
-            synchronized (lock) {
-                if (timeline != null) timeline.stop();
+        synchronized (lock) {
+            if (timeline != null) timeline.stop();
 
-                timeline = new Timeline(
-                        new KeyFrame(
-                                Duration.millis(button.getAnimationSpeed()),
-                                new KeyValue(
-                                        backgroundColorProperty,
-                                        button.getPressedBackgroundColor(),
-                                        Interpolator.EASE_BOTH
-                                ),
-                                new KeyValue(
-                                        textColorProperty,
-                                        button.getTargetTextColor(),
-                                        Interpolator.EASE_BOTH
-                                ),
-                                new KeyValue(
-                                        borderButtomColorProperty,
-                                        button.getStdBorderColor(),
-                                        Interpolator.EASE_BOTH
-                                )
-                        )
-                );
-                timeline.playFromStart();
-            }
+            timeline = new Timeline(
+                    new KeyFrame(
+                            Duration.millis(button.getAnimationSpeed()),
+                            new KeyValue(
+                                    backgroundColorProperty,
+                                    button.getPressedBackgroundColor(),
+                                    Interpolator.EASE_BOTH
+                            ),
+                            new KeyValue(
+                                    textColorProperty,
+                                    button.getTargetTextColor(),
+                                    Interpolator.EASE_BOTH
+                            ),
+                            new KeyValue(
+                                    borderButtomColorProperty,
+                                    button.getStdBorderColor(),
+                                    Interpolator.EASE_BOTH
+                            )
+                    )
+            );
+            timeline.playFromStart();
         }
     }
 }

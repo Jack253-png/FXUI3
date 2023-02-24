@@ -18,27 +18,26 @@
 }
 .ui-button:disabled {
     -fx-opacity: 1;
-    -fx-text-fill: rgba(28, 28, 28, 0.7);
-
-    -fx-border-color: #e3e3e3e5 #e3e3e3e5 #cacacae5 #e3e3e3e5;
-    -fx-background-color:
-            rgba(249, 249, 249, 0.9),
-            rgba(249, 249, 249, 0.9),
-            rgba(249, 249, 249, 0.9),
-            rgba(249, 249, 249, 0.9);
-
+    -ui-button-target-text-color: rgba(28, 28, 28, 0.7);
+    -ui-button-std-text-color: rgb(28, 28, 28, 0.7);
+    -ui-button-target-border-color: rgb(227, 227, 227, 0.9);
+    -ui-button-std-border-color: rgb(227, 227, 227, 0.9);
+    -ui-button-std-background-color: rgb(242, 242, 242);
+    -ui-button-enter-background-color: rgb(242, 242, 242);
+    -ui-button-pressed-background-color: rgb(242, 242, 242);
 }
 .ui-button:default {
     -ui-button-colorization-color: #0077d2;
     -ui-button-target-text-color: rgba(253, 253, 253, 0.7);
     -ui-button-std-text-color: rgb(253, 253, 253);
-    /*-ui-button-target-border-color: #003e72;*/
-    /*-ui-button-std-border-color: #1472c3;*/
-    /*-ui-button-std-background-color: #0066be;*/
-    /*-ui-button-enter-background-color: #1975c5;*/
-    /*-ui-button-pressed-background-color: #3183ca;*/
+}
+.ui-button:default:disabled {
+    -ui-button-colorization-color: #0077d2;
+    -ui-button-target-text-color: rgba(253, 253, 253, 0.7);
+    -ui-button-std-text-color: rgb(253, 253, 253, 0.7);
 }
 .ui-check-box {
+    -ui-button-animation-speed: 40;
     -fx-text-fill: rgb(70, 70, 70);
     -fx-font-size: 14;
 }
