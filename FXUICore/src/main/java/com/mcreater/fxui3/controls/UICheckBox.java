@@ -7,11 +7,13 @@ import com.mcreater.fxui3.controls.skins.UICheckBoxSkin;
 import com.mcreater.fxui3.util.FXUtil;
 import javafx.css.CssMetaData;
 import javafx.css.SimpleStyleableObjectProperty;
+import javafx.css.StyleConverter;
 import javafx.css.Styleable;
 import javafx.css.StyleableObjectProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Skin;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +44,12 @@ public class UICheckBox extends CheckBox implements IControl {
             "theme",
             ResourceProcessor.ThemeType.LIGHT
     );
+    private final StyleableObjectProperty<Color> colorizationColorProperty = new SimpleStyleableObjectProperty<>(
+            StyleableProperties.COLORIZATION_COLOR,
+            UICheckBox.this,
+            "colorization_color",
+            null
+    );
 
     public void setTheme(ResourceProcessor.ThemeType type) {
         themeProperty().set(type);
@@ -52,20 +60,31 @@ public class UICheckBox extends CheckBox implements IControl {
     }
 
     public StyleableObjectProperty<ResourceProcessor.ThemeType> themeProperty() {
-
         return themeProperty;
+    }
+
+    public StyleableObjectProperty<Color> colorizationColorProperty() {
+        return colorizationColorProperty;
+    }
+    public Color getColorizationColor() {
+        return colorizationColorProperty().get();
+    }
+    public void setColorizationColor(Color color) {
+        colorizationColorProperty().set(color);
     }
 
     private static final class StyleableProperties {
         private static final CssMetaData<UICheckBox, ResourceProcessor.ThemeType> THEME =
                 new FXUtil.CssMetaDataImpl<>("-ui-check-box-theme", ThemeConverter.getInstance(), ResourceProcessor.ThemeType.LIGHT, UICheckBox::themeProperty);
+        private static final CssMetaData<UICheckBox, Color> COLORIZATION_COLOR =
+                new FXUtil.CssMetaDataImpl<>("-ui-check-box-colorization-color", StyleConverter.getColorConverter(), null, UICheckBox::colorizationColorProperty);
 
         private static final List<CssMetaData<? extends Styleable, ?>> CHILD_STYLEABLES;
 
         static {
             final List<CssMetaData<? extends Styleable, ?>> styleables =
                     new ArrayList<>(Button.getClassCssMetaData());
-            Collections.addAll(styleables, THEME);
+            Collections.addAll(styleables, THEME, COLORIZATION_COLOR);
             CHILD_STYLEABLES = Collections.unmodifiableList(styleables);
         }
     }

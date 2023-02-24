@@ -37,6 +37,8 @@ public class HelloApplication extends Application {
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
 
+        Color c = Color.rgb(50, 50, 50);
+
         UIButton button = new UIButton("Standard XAML Button");
         Label label = new Label();
 
@@ -69,11 +71,11 @@ public class HelloApplication extends Application {
         UIButton button1 = new UIButton("test");
         UIButton button2 = new UIButton("test");
         UICheckBox checkBox = new UICheckBox("test");
-        checkBox.setTheme(ResourceProcessor.ThemeType.LIGHT);
+        checkBox.setTheme(ResourceProcessor.ThemeType.DARK);
 
-        button1.setTheme(ResourceProcessor.ThemeType.LIGHT);
-        button2.setTheme(ResourceProcessor.ThemeType.LIGHT);
-        button.setTheme(ResourceProcessor.ThemeType.LIGHT);
+        button1.setTheme(ResourceProcessor.ThemeType.DARK);
+        button2.setTheme(ResourceProcessor.ThemeType.DARK);
+        button.setTheme(ResourceProcessor.ThemeType.DARK);
 
 //        button.setDefaultButton(true);
 //        button1.setDefaultButton(true);
@@ -95,7 +97,7 @@ public class HelloApplication extends Application {
         Pane p = new Pane(new HBox(rectangleRed, rectangleBlue), target, vbox);
         p.setBackground(new Background(
                 new BackgroundFill(
-                        Color.rgb(253, 253, 253),
+                        c,
                         CornerRadii.EMPTY,
                         Insets.EMPTY
                 )
@@ -128,7 +130,7 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(p, 320, 240);
         target.prefWidthProperty().bind(scene.widthProperty());
         target.prefHeightProperty().bind(scene.heightProperty());
-        scene.setFill(Color.rgb(253, 253, 253));
+        scene.setFill(c);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
@@ -149,15 +151,15 @@ public class HelloApplication extends Application {
         /* -- light */
         // Color color = Color.rgb(0, 102, 190).interpolate(Color.BLACK, 0.4);
         /* -- dark */
-        // Color color = color;
+        // Color color = Color.rgb(75, 192, 253).interpolate(Color.BLACK, 0.17);
 
         /* Base color to standard border color*/
         /* -- light */
         // Color color = Color.rgb(0, 102, 190).interpolate(Color.rgb(253, 253, 253), 0.08);
         /* -- dark */
-        // Color color = Color.rgb(75, 192, 253).interpolate(Color.BLACK, 0.17);
+        // Color color = color;
     }
     public static void main(String[] args) {
-        launch();
+        Application.launch();
     }
 }

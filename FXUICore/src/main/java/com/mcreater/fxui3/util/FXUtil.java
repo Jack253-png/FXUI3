@@ -1,5 +1,6 @@
 package com.mcreater.fxui3.util;
 
+import com.mcreater.fxui3.assets.ResourceProcessor;
 import javafx.beans.property.Property;
 import javafx.css.CssMetaData;
 import javafx.css.StyleConverter;
@@ -12,6 +13,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.Arrays;
@@ -65,8 +67,30 @@ public class FXUtil {
         }
 
         public StyleableProperty<V> getStyleableProperty(C button) {
-//            propertyFunc.apply(button).addListener((obv, v, v1) -> System.out.println(v1));
             return propertyFunc.apply(button);
+        }
+    }
+
+    public static class ColorizationProcessor {
+        public static Color styleColorToBaseColor(Color styleColor, ResourceProcessor.ThemeType type) {
+            return type == ResourceProcessor.ThemeType.LIGHT ? styleColor.interpolate(Color.rgb(0, 0, 0), 0.11) : styleColor.interpolate(Color.rgb(80, 205, 255), 0.9);
+        }
+
+        public static Color baseColorToL1Color(Color baseColor, ResourceProcessor.ThemeType type) {
+            return type == ResourceProcessor.ThemeType.LIGHT ? baseColor.interpolate(Color.rgb(253, 253, 253), 0.1) : baseColor.interpolate(Color.rgb(50, 50, 50), 0.1);
+        }
+
+        public static Color baseColorToL2Color(Color baseColor, ResourceProcessor.ThemeType type) {
+            Color l1Color = baseColorToL1Color(baseColor, type);
+            return type == ResourceProcessor.ThemeType.LIGHT ? l1Color.interpolate(Color.rgb(253, 253, 253), 0.1) : l1Color.interpolate(Color.rgb(50, 50, 50), 0.1);
+        }
+
+        public static Color baseColorToBottomBorderColor(Color baseColor, ResourceProcessor.ThemeType type) {
+            return type == ResourceProcessor.ThemeType.LIGHT ? baseColor.interpolate(Color.BLACK, 0.4) : baseColor.interpolate(Color.BLACK, 0.17);
+        }
+
+        public static Color baseColorToStdBorderColor(Color baseColor, ResourceProcessor.ThemeType type) {
+            return type == ResourceProcessor.ThemeType.LIGHT ? baseColor.interpolate(Color.rgb(253, 253, 253), 0.08) : baseColor;
         }
     }
 }

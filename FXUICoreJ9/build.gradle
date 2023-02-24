@@ -11,6 +11,16 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = '9'
 targetCompatibility = '9'
 
+compileJava {
+    options.verbose = false
+    options.listFiles = true
+}
+
+compileTestJava {
+    options.verbose = false
+    options.listFiles = true
+}
+
 repositories {
     mavenCentral()
 }
@@ -26,7 +36,7 @@ dependencies {
     implementation project(path: ':FXUICore')
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    implementation("com.google.code.gson:gson:2.8.1")
+    implementation('com.google.code.gson:gson:2.8.9')
 }
 
 test {

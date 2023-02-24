@@ -6,6 +6,8 @@ import com.mcreater.fxui3.controls.converters.NumberConverter;
 import com.mcreater.fxui3.controls.converters.ThemeConverter;
 import com.mcreater.fxui3.controls.skins.UIButtonSkin;
 import com.mcreater.fxui3.util.FXUtil;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.css.CssMetaData;
 import javafx.css.SimpleStyleableIntegerProperty;
 import javafx.css.SimpleStyleableObjectProperty;
@@ -51,7 +53,7 @@ public class UIButton extends Button implements IControl {
     );
     private final StyleableIntegerProperty animationSpeedProperty = new SimpleStyleableIntegerProperty(
             StyleableProperties.ANIMATION_SPEED,
-            100
+            40
     );
     private final StyleableIntegerProperty definedBorderRadiusProperty = new SimpleStyleableIntegerProperty(
             StyleableProperties.DEFINED_BORDER_RADIUS,
@@ -103,6 +105,12 @@ public class UIButton extends Button implements IControl {
             "pressed_background_color",
             Color.BLACK
     );
+    private final StyleableObjectProperty<Color> colorizationColorProperty = new SimpleStyleableObjectProperty<>(
+            StyleableProperties.COLORIZATION_COLOR,
+            UIButton.this,
+            "colorization_color",
+            null
+    );
 
     public void setTheme(ResourceProcessor.ThemeType type) {
         themeProperty().set(type);
@@ -125,7 +133,7 @@ public class UIButton extends Button implements IControl {
     public StyleableIntegerProperty animationSpeedProperty() {
         return animationSpeedProperty;
     }
-    private StyleableIntegerProperty definedBorderRadiusProperty() {
+    public StyleableIntegerProperty definedBorderRadiusProperty() {
         return definedBorderRadiusProperty;
     }
     public int getDefinedBorderRadius() {
@@ -137,54 +145,64 @@ public class UIButton extends Button implements IControl {
     public int getDefinedBorderWidth() {
         return definedBorderWidthProperty().get();
     }
-    private StyleableObjectProperty<Color> targetTextColorProperty() {
+    public StyleableObjectProperty<Color> targetTextColorProperty() {
         return targetTextColorProperty;
     }
     public Color getTargetTextColor() {
         return targetTextColorProperty().get();
     }
-    private StyleableObjectProperty<Color> stdTextColorProperty() {
+    public StyleableObjectProperty<Color> stdTextColorProperty() {
         return stdTextColorProperty;
     }
     public Color getStdTextColor() {
         return stdTextColorProperty().get();
     }
-    private StyleableObjectProperty<Color> targetBorderColorProperty() {
+    public StyleableObjectProperty<Color> targetBorderColorProperty() {
         return targetBorderColorProperty;
     }
     public Color getTargetBorderColor() {
         return targetBorderColorProperty().get();
     }
-    private StyleableObjectProperty<Color> stdBorderColorProperty() {
+    public StyleableObjectProperty<Color> stdBorderColorProperty() {
         return stdBorderColorProperty;
     }
     public Color getStdBorderColor() {
         return stdBorderColorProperty().get();
     }
-    private StyleableObjectProperty<Color> stdBackgroundColorProperty() {
+    public StyleableObjectProperty<Color> stdBackgroundColorProperty() {
         return stdBackgroundColorProperty;
     }
     public Color getStdBackgroundColor() {
         return stdBackgroundColorProperty().get();
     }
-    private StyleableObjectProperty<Color> enterBackgroundColorProperty() {
+    public StyleableObjectProperty<Color> enterBackgroundColorProperty() {
         return enterBackgroundColorProperty;
     }
     public Color getEnterBackgroundColor() {
         return enterBackgroundColorProperty().get();
     }
-    private StyleableObjectProperty<Color> pressedBackgroundColorProperty() {
+    public StyleableObjectProperty<Color> pressedBackgroundColorProperty() {
         return pressedBackgroundColorProperty;
     }
     public Color getPressedBackgroundColor() {
         return pressedBackgroundColorProperty().get();
     }
+    public StyleableObjectProperty<Color> colorizationColorProperty() {
+        return colorizationColorProperty;
+    }
+    public Color getColorizationColor() {
+        return colorizationColorProperty().get();
+    }
+    public void setColorizationColor(Color color) {
+        colorizationColorProperty().set(color);
+    }
+
 
     private static final class StyleableProperties {
         private static final CssMetaData<UIButton, ResourceProcessor.ThemeType> THEME =
                 new FXUtil.CssMetaDataImpl<>("-ui-button-theme", ThemeConverter.getInstance(), ResourceProcessor.ThemeType.LIGHT, UIButton::themeProperty);
         private static final CssMetaData<UIButton, Number> ANIMATION_SPEED =
-                new FXUtil.CssMetaDataImpl<>("-ui-button-animation-speed", NumberConverter.getInstance(), 100, UIButton::animationSpeedProperty);
+                new FXUtil.CssMetaDataImpl<>("-ui-button-animation-speed", NumberConverter.getInstance(), 40, UIButton::animationSpeedProperty);
         private static final CssMetaData<UIButton, Number> DEFINED_BORDER_RADIUS =
                 new FXUtil.CssMetaDataImpl<>("-ui-button-defined-border-radius", NumberConverter.getInstance(), 5, UIButton::definedBorderRadiusProperty);
         private static final CssMetaData<UIButton, Number> DEFINED_BORDER_WIDTH =
@@ -203,13 +221,15 @@ public class UIButton extends Button implements IControl {
                 new FXUtil.CssMetaDataImpl<>("-ui-button-enter-background-color", StyleConverter.getColorConverter(), Color.BLACK, UIButton::enterBackgroundColorProperty);
         private static final CssMetaData<UIButton, Color> PRESSED_BACKGROUND_COLOR =
                 new FXUtil.CssMetaDataImpl<>("-ui-button-pressed-background-color", StyleConverter.getColorConverter(), Color.BLACK, UIButton::pressedBackgroundColorProperty);
+        private static final CssMetaData<UIButton, Color> COLORIZATION_COLOR =
+                new FXUtil.CssMetaDataImpl<>("-ui-button-colorization-color", StyleConverter.getColorConverter(), null, UIButton::colorizationColorProperty);
 
         private static final List<CssMetaData<? extends Styleable, ?>> CHILD_STYLEABLES;
 
         static {
             final List<CssMetaData<? extends Styleable, ?>> styleables =
                     new ArrayList<>(Button.getClassCssMetaData());
-            Collections.addAll(styleables, THEME, ANIMATION_SPEED, DEFINED_BORDER_RADIUS, DEFINED_BORDER_WIDTH, TARGET_TEXT_COLOR, STD_TEXT_COLOR, TARGET_BORDER_COLOR, STD_BORDER_COLOR, STD_BACKGROUND_COLOR, ENTER_BACKGROUND_COLOR, PRESSED_BACKGROUND_COLOR);
+            Collections.addAll(styleables, THEME, ANIMATION_SPEED, DEFINED_BORDER_RADIUS, DEFINED_BORDER_WIDTH, TARGET_TEXT_COLOR, STD_TEXT_COLOR, TARGET_BORDER_COLOR, STD_BORDER_COLOR, STD_BACKGROUND_COLOR, ENTER_BACKGROUND_COLOR, PRESSED_BACKGROUND_COLOR, COLORIZATION_COLOR);
             CHILD_STYLEABLES = Collections.unmodifiableList(styleables);
         }
     }

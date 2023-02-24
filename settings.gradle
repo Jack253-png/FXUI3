@@ -1,4 +1,4 @@
 rootProject.name = "fxui3"
 include 'FXUICore'
 include 'FXUICoreJ9'
-
+include 'FXUITest'

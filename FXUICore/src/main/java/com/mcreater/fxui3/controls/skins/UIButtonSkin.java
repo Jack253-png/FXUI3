@@ -1,6 +1,7 @@
 package com.mcreater.fxui3.controls.skins;
 
 import com.mcreater.fxui3.controls.UIButton;
+import com.mcreater.fxui3.util.FXUtil;
 import com.sun.javafx.scene.control.skin.ButtonSkin;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -31,6 +32,8 @@ public class UIButtonSkin extends ButtonSkin {
         super(button);
         button.themeProperty().addListener((observableValue, type, t1) -> genThemeChangeAnimation(button));
         button.defaultButtonProperty().addListener((observableValue, aBoolean, t1) -> genThemeChangeAnimation(button));
+        button.colorizationColorProperty().addListener((observableValue, color, t1) -> updateColor(button, t1));
+        updateColor(button, button.getColorizationColor());
 
         backgroundColorProperty = new SimpleObjectProperty<>();
         backgroundColorProperty.addListener((observableValue, number, t1) -> button.setBackground(new Background(
@@ -70,6 +73,16 @@ public class UIButtonSkin extends ButtonSkin {
         button.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> genMouseExitAnimation(button));
         button.addEventHandler(MouseEvent.MOUSE_PRESSED, mouseEvent -> genMousePressedAnimation(button));
         button.addEventHandler(MouseEvent.MOUSE_RELEASED, mouseEvent -> genMouseEnterAnimation(button));
+    }
+    private void updateColor(UIButton button, Color color) {
+        if (color != null && button.isDefaultButton()) {
+            Color base = FXUtil.ColorizationProcessor.styleColorToBaseColor(color, button.getTheme());
+            button.stdBackgroundColorProperty().set(base);
+            button.enterBackgroundColorProperty().set(FXUtil.ColorizationProcessor.baseColorToL1Color(base, button.getTheme()));
+            button.pressedBackgroundColorProperty().set(FXUtil.ColorizationProcessor.baseColorToL2Color(base, button.getTheme()));
+            button.stdBorderColorProperty().set(FXUtil.ColorizationProcessor.baseColorToStdBorderColor(base, button.getTheme()));
+            button.targetBorderColorProperty().set(FXUtil.ColorizationProcessor.baseColorToBottomBorderColor(base, button.getTheme()));
+        }
     }
     private boolean checkState(UIButton button) {
         return !button.isDisabled();

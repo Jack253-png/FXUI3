@@ -8,59 +8,63 @@
     -ui-button-defined-border-width: 1;
     -ui-button-target-text-color: rgba(28, 28, 28, 0.7);
     -ui-button-std-text-color: rgb(28, 28, 28);
-    -ui-button-target-border-color: rgb(202, 202, 202, 0.7);
-    -ui-button-std-border-color: rgb(227, 227, 227, 0.7);
-    -ui-button-std-background-color: rgb(249, 249, 249, 0.7);
+    -ui-button-target-border-color: rgb(202, 202, 202, 0.9);
+    -ui-button-std-border-color: rgb(227, 227, 227, 0.9);
+    -ui-button-std-background-color: rgb(249, 249, 249, 0.9);
     -ui-button-enter-background-color: rgb(246, 246, 246);
     -ui-button-pressed-background-color: rgb(242, 242, 242);
+    -ui-button-animation-speed: 40;
+    -ui-button-colorization-color: null;
 }
 .ui-button:disabled {
     -fx-opacity: 1;
     -fx-text-fill: rgba(28, 28, 28, 0.7);
 
-    -fx-border-color: #e3e3e3b2 #e3e3e3b2 #cacacab2 #e3e3e3b2;
+    -fx-border-color: #e3e3e3e5 #e3e3e3e5 #cacacae5 #e3e3e3e5;
     -fx-background-color:
-            rgba(249, 249, 249, 0.7),
-            rgba(249, 249, 249, 0.7),
-            rgba(249, 249, 249, 0.7),
-            rgba(249, 249, 249, 0.7);
+            rgba(249, 249, 249, 0.9),
+            rgba(249, 249, 249, 0.9),
+            rgba(249, 249, 249, 0.9),
+            rgba(249, 249, 249, 0.9);
 
 }
 .ui-button:default {
+    -ui-button-colorization-color: #0077d2;
     -ui-button-target-text-color: rgba(253, 253, 253, 0.7);
     -ui-button-std-text-color: rgb(253, 253, 253);
-    -ui-button-target-border-color: #003e72;
-    -ui-button-std-border-color: #1472c3;
-    -ui-button-std-background-color: #0066be;
-    -ui-button-enter-background-color: #1975c5;
-    -ui-button-pressed-background-color: #3183ca;
+    /*-ui-button-target-border-color: #003e72;*/
+    /*-ui-button-std-border-color: #1472c3;*/
+    /*-ui-button-std-background-color: #0066be;*/
+    /*-ui-button-enter-background-color: #1975c5;*/
+    /*-ui-button-pressed-background-color: #3183ca;*/
 }
 .ui-check-box {
     -fx-text-fill: rgb(70, 70, 70);
     -fx-font-size: 14;
 }
 .ui-check-box .box {
-    -fx-background-color: #eaeaea #eaeaea #eaeaea #eaeaea;
+    -fx-background-color: #eaeaeae5 #eaeaeae5 #eaeaeae5 #eaeaeae5;
     -fx-background-insets: 0 0 1 0;
     -fx-border-color: #838383;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 .ui-check-box:hover .box {
-    -fx-background-color: #e5e5e5 #e5e5e5 #e5e5e5 #e5e5e5;
+    -fx-background-color: #e5e5e5e5 #e5e5e5e5 #e5e5e5e5 #e5e5e5e5;
 }
 .ui-check-box:pressed .box {
-    -fx-background-color: #dcdcdc #dcdcdc #dcdcdc #dcdcdc;
+    -fx-background-color: #dcdcdce5 #dcdcdce5 #dcdcdce5 #dcdcdce5;
     -fx-border-color: #b6b6b6;
 }
 .ui-check-box:focused .box {
-    -fx-background-color: #eaeaea #eaeaea #eaeaea #eaeaea;
+    -fx-background-color: #eaeaeae5 #eaeaeae5 #eaeaeae5 #eaeaeae5;
     -fx-background-insets: 0 0 1 0;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 .ui-check-box:selected .box,
 .ui-check-box:indeterminate .box {
+    -ui-check-box-colorization-color: #0077d2;
     -fx-background-color: #0066be;
     -fx-border-color: #0066be;
 }
@@ -71,6 +75,11 @@
 }
 .ui-check-box:selected:pressed .box,
 .ui-check-box:indeterminate:pressed .box {
+    -fx-background-color: #3183ca;
+    -fx-border-color: #3183ca;
+}
+.ui-check-box:selected:disabled .box,
+.ui-check-box:indeterminate:disabled .box {
     -fx-background-color: #3183ca;
     -fx-border-color: #3183ca;
 }
@@ -95,11 +104,6 @@
     -fx-text-fill: rgb(156, 156, 156);
 }
 .ui-check-box:disabled .box {
-    -fx-background-color: #dcdcdc #dcdcdc #dcdcdc #dcdcdc;
+    -fx-background-color: #dcdcdce5 #dcdcdce5 #dcdcdce5 #dcdcdce5;
     -fx-border-color: #b6b6b6;
-}
-.ui-check-box:selected:disabled .box,
-.ui-check-box:indeterminate:disabled .box {
-    -fx-background-color: #3183ca;
-    -fx-border-color: #3183ca;
 }
