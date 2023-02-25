@@ -137,30 +137,6 @@ public class HelloApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
-
-        /* System color to control color */
-        /* -- light */
-        // base = base.interpolate(Color.rgb(0, 0, 0), 0.11);
-        /* -- dark */
-        // base = base.interpolate(Color.rgb(80, 205, 255), 0.9);
-
-        /* Base color to hover color / pressed color */
-        /* -- light */
-        // Color color = Color.rgb(0, 102, 190).interpolate(Color.rgb(253, 253, 253), 0.1).interpolate(Color.rgb(253, 253, 253), 0.1);
-        /* -- dark */
-        // Color color = Color.rgb(75, 192, 253).interpolate(Color.rgb(50, 50, 50), 0.1).interpolate(Color.rgb(50, 50, 50), 0.1);
-
-        /* Base color to bottom border color */
-        /* -- light */
-        // Color color = Color.rgb(0, 102, 190).interpolate(Color.BLACK, 0.4);
-        /* -- dark */
-        // Color color = Color.rgb(75, 192, 253).interpolate(Color.BLACK, 0.17);
-
-        /* Base color to standard border color*/
-        /* -- light */
-        // Color color = Color.rgb(0, 102, 190).interpolate(Color.rgb(253, 253, 253), 0.08);
-        /* -- dark */
-        // Color color = color;
     }
     public static void main(String[] args) {
         Application.launch();

@@ -14,6 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.Arrays;
@@ -92,5 +94,9 @@ public class FXUtil {
         public static Color baseColorToStdBorderColor(Color baseColor, ResourceProcessor.ThemeType type) {
             return type == ResourceProcessor.ThemeType.LIGHT ? baseColor.interpolate(Color.rgb(253, 253, 253), 0.08) : baseColor;
         }
+    }
+
+    public static Point2D getStatePlace(Window stage) {
+        return new Point2D(stage.getX(), stage.getY());
     }
 }
