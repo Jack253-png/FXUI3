@@ -204,7 +204,7 @@ public class UIButton extends Button implements IControl {
         private static final CssMetaData<UIButton, Number> DEFINED_BORDER_RADIUS =
                 new FXUtil.CssMetaDataImpl<>("-ui-button-defined-border-radius", NumberConverter.getInstance(), 5, UIButton::definedBorderRadiusProperty);
         private static final CssMetaData<UIButton, Number> DEFINED_BORDER_WIDTH =
-                new FXUtil.CssMetaDataImpl<>("-ui-button-defined-border-width",NumberConverter.getInstance(), 1, UIButton::definedBorderWidthProperty);
+                new FXUtil.CssMetaDataImpl<>("-ui-button-defined-border-widths", NumberConverter.getInstance(), 1, UIButton::definedBorderWidthProperty);
         private static final CssMetaData<UIButton, Color> TARGET_TEXT_COLOR =
                 new FXUtil.CssMetaDataImpl<>("-ui-button-target-text-color", StyleConverter.getColorConverter(), Color.BLACK, UIButton::targetTextColorProperty);
         private static final CssMetaData<UIButton, Color> STD_TEXT_COLOR =

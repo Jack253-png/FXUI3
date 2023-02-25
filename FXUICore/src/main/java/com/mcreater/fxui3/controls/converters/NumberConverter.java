@@ -1,13 +1,12 @@
 package com.mcreater.fxui3.controls.converters;
 
-import com.sun.javafx.css.StyleConverterImpl;
 import javafx.css.ParsedValue;
 import javafx.css.StyleConverter;
 import javafx.scene.text.Font;
 
 import java.util.logging.Logger;
 
-public class NumberConverter extends StyleConverterImpl<String, Number> {
+public class NumberConverter extends StyleConverter<String, Number> {
     private NumberConverter() {
         super();
     }

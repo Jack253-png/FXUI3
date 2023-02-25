@@ -57,7 +57,7 @@ public class FXUtil {
     }
     public static class CssMetaDataImpl<C extends Styleable, V, P extends StyleableProperty<V> & Property<V>> extends CssMetaData<C, V> {
         private final Function<C, P> propertyFunc;
-        public CssMetaDataImpl(String s, StyleConverter<?, V> styleConverter, V o, Function<C, P> propertyFunc) {
+        public CssMetaDataImpl(String s, StyleConverter<String, V> styleConverter, V o, Function<C, P> propertyFunc) {
             super(s, styleConverter, o);
             this.propertyFunc = propertyFunc;
         }

@@ -5,7 +5,7 @@
     -fx-background-insets: 0 0 1 0;
 
     -ui-button-defined-border-radius: 5;
-    -ui-button-defined-border-width: 1;
+    -ui-button-defined-border-widths: 1;
     -ui-button-target-text-color: rgba(28, 28, 28, 0.7);
     -ui-button-std-text-color: rgb(28, 28, 28);
     -ui-button-target-border-color: rgb(202, 202, 202, 0.9);
@@ -13,7 +13,7 @@
     -ui-button-std-background-color: rgb(249, 249, 249, 0.9);
     -ui-button-enter-background-color: rgb(246, 246, 246);
     -ui-button-pressed-background-color: rgb(242, 242, 242);
-    -ui-button-animation-speed: 40;
+    -ui-button-animation-speed: 75;
     -ui-button-colorization-color: null;
 }
 .ui-button:disabled {
@@ -37,50 +37,44 @@
     -ui-button-std-text-color: rgb(253, 253, 253, 0.7);
 }
 .ui-check-box {
-    -ui-button-animation-speed: 40;
+    -ui-check-box-colorization-color: null;
     -fx-text-fill: rgb(70, 70, 70);
     -fx-font-size: 14;
+    -ui-check-box-colorization-type: not-selected;
+    -ui-check-box-background-inset: 1;
+    -ui-check-box-border-radius: 5;
+    -ui-check-box-target-border-color: #b6b6b6;
+    -ui-check-box-std-border-color: #838383;
+    -ui-check-box-std-background-color: #eaeaeae5;
+    -ui-check-box-enter-background-color: #e5e5e5e5;
+    -ui-check-box-pressed-background-color: #dcdcdce5;
 }
-.ui-check-box .box {
-    -fx-background-color: #eaeaeae5 #eaeaeae5 #eaeaeae5 #eaeaeae5;
-    -fx-background-insets: 0 0 1 0;
-    -fx-border-color: #838383;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
+
+.ui-check-box:hover {
+    -ui-check-box-colorization-type: hover;
 }
-.ui-check-box:hover .box {
-    -fx-background-color: #e5e5e5e5 #e5e5e5e5 #e5e5e5e5 #e5e5e5e5;
+
+.ui-check-box:pressed,
+.ui-check-box:disabled {
+    -ui-check-box-colorization-type: pressed;
 }
-.ui-check-box:pressed .box {
-    -fx-background-color: #dcdcdce5 #dcdcdce5 #dcdcdce5 #dcdcdce5;
-    -fx-border-color: #b6b6b6;
-}
-.ui-check-box:focused .box {
-    -fx-background-color: #eaeaeae5 #eaeaeae5 #eaeaeae5 #eaeaeae5;
-    -fx-background-insets: 0 0 1 0;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
-}
-.ui-check-box:selected .box,
-.ui-check-box:indeterminate .box {
+
+.ui-check-box:selected,
+.ui-check-box:indeterminate {
     -ui-check-box-colorization-color: #0077d2;
-    -fx-background-color: #0066be;
-    -fx-border-color: #0066be;
+    -ui-check-box-colorization-type: normal;
 }
-.ui-check-box:selected:hover .box,
-.ui-check-box:indeterminate:hover .box {
-    -fx-background-color: #1975c5;
-    -fx-border-color: #1975c5;
+
+.ui-check-box:selected:hover,
+.ui-check-box:indeterminate:hover {
+    -ui-check-box-colorization-type: hover;
 }
-.ui-check-box:selected:pressed .box,
-.ui-check-box:indeterminate:pressed .box {
-    -fx-background-color: #3183ca;
-    -fx-border-color: #3183ca;
-}
-.ui-check-box:selected:disabled .box,
-.ui-check-box:indeterminate:disabled .box {
-    -fx-background-color: #3183ca;
-    -fx-border-color: #3183ca;
+
+.ui-check-box:selected:pressed,
+.ui-check-box:indeterminate:pressed,
+.ui-check-box:selected:disabled,
+.ui-check-box:indeterminate:disabled {
+    -ui-check-box-colorization-type: pressed;
 }
 .ui-check-box .box .mark {
     -fx-background-color: transparent;
@@ -100,9 +94,5 @@
 }
 .ui-check-box:disabled {
     -fx-opacity: 1;
-    -fx-text-fill: rgb(156, 156, 156);
-}
-.ui-check-box:disabled .box {
-    -fx-background-color: #dcdcdce5 #dcdcdce5 #dcdcdce5 #dcdcdce5;
-    -fx-border-color: #b6b6b6;
+    -fx-text-fill: rgb(70, 70, 70, 0.7);
 }
