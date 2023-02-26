@@ -22,12 +22,13 @@ compileTestJava {
 }
 
 repositories {
+    maven { url "https://maven.aliyun.com/nexus/content/groups/public" }
     mavenCentral()
 }
 
 javafx {
     if (JavaVersion.current() >= JavaVersion.VERSION_11) {
-        version = '17.0.2'
+        version = '19.0.2.1'
         modules = ["javafx.controls", "javafx.fxml"]
     }
 }

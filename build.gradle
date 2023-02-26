@@ -10,6 +10,7 @@ version '1.0-SNAPSHOT'
 
 project(":FXUICoreJ9") {
     repositories {
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public" }
         mavenCentral()
     }
 
@@ -50,6 +51,7 @@ project(":FXUICoreJ9") {
 
 project(":FXUICore") {
     repositories {
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public" }
         mavenCentral()
     }
 
@@ -88,6 +90,7 @@ project(":FXUICore") {
 
 project(":FXUITest") {
     repositories {
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public" }
         mavenCentral()
     }
 
