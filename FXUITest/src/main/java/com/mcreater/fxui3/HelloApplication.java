@@ -126,7 +126,7 @@ public class HelloApplication extends Application {
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.setAutoReverse(true);
-//        timeline.playFromStart();
+        timeline.playFromStart();
 
         IBrush.getInAppAeroGrassBrush().apply(target, Color.rgb(50, 50, 50, 0.25));
 
